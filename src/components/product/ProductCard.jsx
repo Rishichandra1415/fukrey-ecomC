@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { useWishlist } from "@/context";
+import { motion, AnimatePresence } from "framer-motion";
+import { useWishlist, useCart } from "@/context";
+import { ChevronLeft, ChevronRight, ShoppingBag, X } from "lucide-react";
 
 /**
  * ProductCard component simplified for:
@@ -13,7 +15,40 @@ import { useWishlist } from "@/context";
  */
 export default function ProductCard({ product }) {
   const { toggleWishlist, isInWishlist } = useWishlist();
+  const { addToCart } = useCart();
   const isWishlisted = isInWishlist(product?.id);
+  
+  const images = product?.variants?.map(v => v.image) || [product?.image || "/products/placeholder.png"];
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [selectedVariant, setSelectedVariant] = useState(product?.variants?.[0]);
+  const [showSizeSelector, setShowSizeSelector] = useState(false);
+
+  const handleVariantSelect = (variant, index) => {
+    setSelectedVariant(variant);
+    setCurrentImageIndex(index);
+  };
+
+  const toggleSizeSelector = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowSizeSelector(!showSizeSelector);
+  };
+
+  const nextImage = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const newIndex = (currentImageIndex + 1) % images.length;
+    setCurrentImageIndex(newIndex);
+    setSelectedVariant(product.variants[newIndex]);
+  };
+
+  const prevImage = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const newIndex = (currentImageIndex - 1 + images.length) % images.length;
+    setCurrentImageIndex(newIndex);
+    setSelectedVariant(product.variants[newIndex]);
+  };
 
   const formattedPrice = new Intl.NumberFormat("en-IN", {
     style: "currency",
@@ -42,14 +77,59 @@ export default function ProductCard({ product }) {
       >
         {/* Image Container */}
         <div className="relative aspect-[4/5] w-full overflow-hidden bg-fukrey-muted/5">
-          <Image
-            src={product?.image || "/products/placeholder.png"}
-            alt={product?.name || "Product"}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-            priority={false}
-          />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={selectedVariant?.color || currentImageIndex}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="h-full w-full"
+            >
+              <Image
+                src={selectedVariant?.image || images[currentImageIndex]}
+                alt={product?.name || "Product"}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover transition-all duration-300 ease-out group-hover:scale-105"
+                priority={false}
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation Arrows */}
+          {images.length > 1 && (
+            <>
+              <button
+                onClick={prevImage}
+                className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/60 p-1.5 text-foreground opacity-100 transition-all hover:bg-background sm:opacity-0 sm:group-hover:opacity-100"
+                aria-label="Previous image"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                onClick={nextImage}
+                className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-background/60 p-1.5 text-foreground opacity-100 transition-all hover:bg-background sm:opacity-0 sm:group-hover:opacity-100"
+                aria-label="Next image"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+
+              {/* Dot Indicators */}
+              <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-1.5 opacity-100 transition-opacity sm:opacity-0 sm:group-hover:opacity-100">
+                {images.map((_, index) => (
+                  <div
+                    key={index}
+                    className={`h-1.5 w-1.5 rounded-full transition-all ${
+                      index === currentImageIndex 
+                        ? "w-3 bg-amber-600" 
+                        : "bg-white/60"
+                    }`}
+                  />
+                ))}
+              </div>
+            </>
+          )}
 
           {/* Discount Badge */}
           {product?.discount > 0 && (
@@ -57,6 +137,56 @@ export default function ProductCard({ product }) {
               -{product.discount}%
             </div>
           )}
+
+          {/* Size Selection Overlay */}
+          <AnimatePresence>
+            {showSizeSelector && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                className="absolute inset-0 z-30 flex flex-col items-center justify-center bg-black/70 p-4 text-white backdrop-blur-sm"
+              >
+                <button
+                  onClick={toggleSizeSelector}
+                  className="absolute right-3 top-3 rounded-full bg-white/20 p-1 transition-colors hover:bg-white/40"
+                >
+                  <X className="h-4 w-4" />
+                </button>
+                <p className="mb-4 text-xs font-bold uppercase tracking-widest">Select Size</p>
+                <div className="grid grid-cols-3 gap-2">
+                  {(product?.sizes || ["S", "M", "L", "XL", "XXL"]).map((size) => (
+                    <button
+                      key={size}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        // Add to cart with selected size and variant color
+                        addToCart({
+                          ...product,
+                          selectedSize: size,
+                          selectedColor: selectedVariant?.color || "Default"
+                        }, 1);
+                        setShowSizeSelector(false);
+                      }}
+                      className="rounded border border-white/30 px-3 py-1.5 text-xs font-medium transition-all hover:bg-white hover:text-black active:scale-95"
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Cart Button */}
+          <button
+            onClick={toggleSizeSelector}
+            className="absolute bottom-3 right-3 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-fukrey-border/20 bg-background/40 text-foreground backdrop-blur-md transition-all hover:bg-background active:scale-90"
+            aria-label="Select size and add to cart"
+          >
+            <ShoppingBag className="h-4 w-4 sm:h-5 sm:w-5" />
+          </button>
         </div>
 
         {/* Product Info */}
@@ -70,10 +200,41 @@ export default function ProductCard({ product }) {
               {product?.rating || "4.5"}
             </div>
           </div>
+
+          {/* Color Selector UI */}
+          {product?.variants?.length > 1 && (
+            <div className="flex items-center gap-2 mt-2" onClick={(e) => e.stopPropagation()}>
+              <div className="flex gap-2">
+                {product.variants.slice(0, 3).map((variant, index) => (
+                  <div
+                    key={index}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleVariantSelect(variant, index);
+                    }}
+                    className={`w-6 h-6 rounded-full cursor-pointer transition-all ${
+                        selectedVariant?.color === variant.color 
+                          ? "border-2 border-black" 
+                          : "border border-gray-300"
+                    }`}
+                    style={{ backgroundColor: variant.colorCode }}
+                    title={variant.color}
+                  />
+                ))}
+              </div>
+              {product.variants.length > 3 && (
+                <span className="text-[10px] font-medium text-fukrey-muted sm:text-xs">
+                  +{product.variants.length - 3}
+                </span>
+              )}
+            </div>
+          )}
           
-          <h3 className="mt-1 text-sm font-semibold text-foreground transition-colors group-hover:text-amber-600/80 sm:text-base">
+          <h3 className="mt-2 text-sm font-semibold text-foreground transition-colors group-hover:text-amber-600/80 sm:text-base">
             {product?.name || "Premium Cotton Product"}
           </h3>
+
+
 
           <div className="mt-auto pt-3">
             <div className="flex items-baseline gap-2">

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, useMemo } from "react";
+import { toast } from "react-hot-toast";
 
 const CartContext = createContext(null);
 
@@ -49,6 +50,7 @@ export const CartProvider = ({ children }) => {
       }
       return [...prevCart, { ...product, quantity }];
     });
+    toast.success("Product added to cart!");
   };
 
   // Remove item from cart

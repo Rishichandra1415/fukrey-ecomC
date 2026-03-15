@@ -31,21 +31,19 @@ export default function ProductDetailPage({ params }) {
   const { addToCart } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
   const [selectedSize, setSelectedSize] = useState(null);
-  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedVariant, setSelectedVariant] = useState(null);
   const [addedToCart, setAddedToCart] = useState(false);
   const [activeImage, setActiveImage] = useState(0);
 
   const product = productsData.find((p) => p.id === id);
 
-  // Mock gallery images (since we only have one per product in products.json)
-  const productImages = product 
-    ? [
-        product.image,
-        "/products/placeholder.png",
-        product.image,
-        "/products/placeholder.png"
-      ]
-    : [];
+  // Initialize selectedVariant once product is found
+  if (product && !selectedVariant) {
+    setSelectedVariant(product.variants?.[0]);
+  }
+
+  // Derived images from variants
+  const productImages = product?.variants?.map(v => v.image) || [];
 
   if (!product) {
     return (
@@ -84,8 +82,17 @@ export default function ProductDetailPage({ params }) {
   const categoryName = product.category.charAt(0).toUpperCase() + product.category.slice(1);
 
   const handleAddToCart = () => {
+    if (!product || !selectedVariant) return;
+    
     addToCart(
-      { ...product, selectedSize: selectedSize || product.sizes?.[0], selectedColor: selectedColor || product.colors?.[0] },
+      { 
+        ...product, 
+        productId: product.id, // User requested field
+        selectedSize: selectedSize || product.sizes?.[0], 
+        selectedColor: selectedVariant.color, // For context logic
+        color: selectedVariant.color, // User requested field
+        image: selectedVariant.image // User requested field
+      },
       1
     );
     setAddedToCart(true);
@@ -133,7 +140,7 @@ export default function ProductDetailPage({ params }) {
                       alt={`${product.name} - Image ${activeImage + 1}`}
                       fill
                       sizes="(max-width: 1024px) 100vw, 50vw"
-                      className="object-cover"
+                      className="object-cover transition-all duration-300"
                       priority
                     />
                   </motion.div>
@@ -224,22 +231,31 @@ export default function ProductDetailPage({ params }) {
               )}
 
               {/* Colors */}
-              {product.colors?.length > 0 && (
+              {product.variants?.length > 0 && (
                 <div className="mt-6">
-                  <p className="mb-3 text-sm font-medium text-foreground">Color</p>
-                  <div className="flex flex-wrap gap-2">
-                    {product.colors.map((color) => (
+                  <p className="mb-3 text-sm font-medium text-foreground">
+                    Color: <span className="text-fukrey-muted">{selectedVariant?.color || ""}</span>
+                  </p>
+                  <div className="flex flex-wrap gap-3">
+                    {product.variants.map((variant, index) => (
                       <button
-                        key={color}
+                        key={variant.color}
                         type="button"
-                        onClick={() => setSelectedColor(color)}
-                        className={`rounded-lg border px-4 py-2.5 text-sm font-medium transition-colors ${
-                          selectedColor === color
-                            ? "border-foreground bg-foreground text-background"
-                            : "border-fukrey-border text-foreground hover:border-foreground/40"
+                        onClick={() => {
+                          setSelectedVariant(variant);
+                          setActiveImage(index);
+                        }}
+                        className={`group relative h-10 w-10 rounded-full border-2 transition-all p-0.5 ${
+                          selectedVariant?.color === variant.color
+                            ? "border-foreground"
+                            : "border-fukrey-border hover:border-foreground/40"
                         }`}
+                        title={variant.color}
                       >
-                        {color}
+                        <div 
+                          className="h-full w-full rounded-full border border-black/10" 
+                          style={{ backgroundColor: variant.colorCode }}
+                        />
                       </button>
                     ))}
                   </div>

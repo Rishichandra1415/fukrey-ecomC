@@ -87,7 +87,13 @@ src/
 - **`components/layout/Navbar.jsx`** – Sticky navbar: logo (left), Home / New Arrivals (center), search + wishlist + cart (right). Mobile hamburger menu, dark mode support.
 - **`components/layout/Header.js`** – Legacy header; use **Navbar** for the main site header.
 - **`components/layout/Footer.js`** – Site footer; add links and copyright.
-- **`components/product/ProductCard.jsx`** – Refined card: Full-card click navigation to details, removal of clutter buttons (AddToCart/Details) for a cleaner UI, independent heart toggle.
+- **`components/product/ProductCard.jsx`** – Premium card with interactive features:
+  - **Image Slider**: Multiple images with smooth transitions and dot indicators.
+  - **Color Selection**: Interactive swatches below the rating (limited to first 3 with a `+N` overflow indicator). High-contrast selection indicator (`border-2 border-black`).
+  - **Select Size Overlay**: "Quick Add" functionality via Cart icon to select sizes directly from the card.
+  - **Wishlist Toggle**: Independent heart button for fast saving.
+  - **Toast Notifications**: Real-time feedback for Cart and Wishlist actions using **React Hot Toast**.
+  - **Full Navigation**: Click anywhere else to view full product details.
 - **`components/product/ProductGrid.jsx`** – Responsive grid of ProductCards used throughout the app.
 - **`components/product/ProductFilter.jsx`** – Premium filtering toolbar with sorting by Price, Rating, and Highest Discount.
 - **`components/cart/CartItem.js`** – One line item in the cart; receives `item` prop.
@@ -110,7 +116,7 @@ import { Navbar, Footer, HeroSection, Hero, Button, ProductCard } from "@/compon
 
 - **`src/context/CartContext.jsx`** – Comprehensive `CartProvider` and `useCart()` for cart state management.
   - **State:** `cart` (array of items)
-  - **Actions:** `addToCart(product, quantity)`, `removeFromCart(productId)`, `updateQuantity(productId, quantity)`, `clearCart()`
+  - **Actions:** `addToCart(product, quantity)` (persists variant color and image), `removeFromCart(productId)`, `updateQuantity(productId, quantity)`, `clearCart()`
   - **Computed values:** `totalItems`, `totalPrice`
 - **`src/context/WishlistContext.jsx`** – Centralized wishlist provider.
   - **Actions:** `toggleWishlist(product)`, `isInWishlist(productId)`, `moveToCart(product)`
@@ -164,10 +170,9 @@ Each product object includes:
 | **category** | string | One of: `shirts`, `tshirts`, `jeans`, `trousers` |
 | **price** | number | Price in INR (e.g. 2499) |
 | **discount** | number | Discount percentage (0–30) |
-| **image** | string | Image path (e.g. `/products/shirt-oxford-1.jpg`) |
+| **variants** | object[] | Array of color variants: `{ color, colorCode, image }` |
 | **description** | string | Short product description |
 | **sizes** | string[] | Available sizes (e.g. `["S","M","L","XL"]`) |
-| **colors** | string[] | Available colour names |
 | **rating** | number | Average rating (e.g. 4.5) |
 
 ### Example usage
@@ -202,7 +207,7 @@ Single-product page with responsive layout: image and details side-by-side on de
 | **Product details** | Heading, category path, description, and premium star rating. |
 | **Price** | INR formatting; original price with strikethrough when discount exists. |
 | **Sizes** | Selectable button group for sizes. |
-| **Colors** | Selectable button group for colors. |
+| **Colors** | Interactive color circles with selection sync. Updates main gallery and includes label like `Color: Grey`. |
 | **Add to cart** | Integrated with `CartContext` with real-time feedback. |
 | **Add to wishlist** | Integrated with `WishlistContext`, persists across navigation. |
 
@@ -278,5 +283,5 @@ export default function Home() {
 
 ## Tech Stack
 
-- **Next.js** (App Router), **React 19**, **Tailwind CSS v4**, **Framer Motion**, **ESLint**
+- **Next.js** (App Router), **React 19**, **Tailwind CSS v4**, **Framer Motion**, **Lucide React**, **React Hot Toast**, **ESLint**
 - **Fukrey theme:** black & white, class-based dark mode, container, smooth transitions (`tailwind.config.js`, `globals.css`)

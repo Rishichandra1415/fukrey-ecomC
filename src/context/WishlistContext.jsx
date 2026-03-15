@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from "react";
+import { toast } from "react-hot-toast";
 
 const WishlistContext = createContext();
 
@@ -36,15 +37,19 @@ export const WishlistProvider = ({ children }) => {
       }
       return [...prevItems, product];
     });
+    toast.success("Added to wishlist!");
   }, []);
 
   const removeFromWishlist = useCallback((productId) => {
     setWishlistItems((prevItems) => 
       prevItems.filter((item) => item.id !== productId)
     );
+    toast.success("Removed from wishlist.");
   }, []);
 
   const toggleWishlist = useCallback((product) => {
+    const isAdding = !wishlistItems.some((item) => item.id === product.id);
+    
     setWishlistItems((prevItems) => {
       const exists = prevItems.some((item) => item.id === product.id);
       if (exists) {
@@ -52,7 +57,13 @@ export const WishlistProvider = ({ children }) => {
       }
       return [...prevItems, product];
     });
-  }, []);
+
+    if (isAdding) {
+      toast.success("Added to wishlist!");
+    } else {
+      toast.success("Removed from wishlist.");
+    }
+  }, [wishlistItems]);
 
   const isInWishlist = useCallback((productId) => {
     return wishlistItems.some((item) => item.id === productId);

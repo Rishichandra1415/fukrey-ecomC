@@ -5,10 +5,30 @@
     "category": "shirts",
     "price": 2499,
     "discount": 20,
-    "image": "/products/shirt-oxford-1.png",
     "description": "Crisp cotton Oxford shirt with button-down collar. Perfect for office and semi-formal occasions. Easy-care fabric.",
     "sizes": ["S", "M", "L", "XL", "XXL"],
-    "colors": ["White", "Light Blue", "Pink"],
+    "variants": [
+      {
+        "color": "White",
+        "colorCode": "#FFFFFF",
+        "image": "/products/shirt-oxford-1.png"
+      },
+      {
+        "color": "Light Blue",
+        "colorCode": "#ADD8E6",
+        "image": "/products/shirt-linen-2.png"
+      },
+      {
+        "color": "Pink",
+        "colorCode": "#FFC0CB",
+        "image": "/products/shirt-slim-3.png"
+      },
+       {
+        "color": "yellow",
+        "colorCode": "#FFFF00",
+        "image": "/products/shirt-slim-3.png"
+      }
+    ],
     "rating": 4.5
   },
   {
@@ -17,10 +37,25 @@
     "category": "shirts",
     "price": 1899,
     "discount": 15,
-    "image": "/products/shirt-linen-2.png",
     "description": "Breathable linen-blend shirt for summer. Relaxed fit with chest pocket. Ideal for casual outings.",
     "sizes": ["M", "L", "XL"],
-    "colors": ["Beige", "Navy", "Olive"],
+    "variants": [
+      {
+        "color": "Beige",
+        "colorCode": "#F5F5DC",
+        "image": "/products/shirt-linen-2.png"
+      },
+      {
+        "color": "Navy",
+        "colorCode": "#000080",
+        "image": "/products/shirt-oxford-1.png"
+      },
+      {
+        "color": "Olive",
+        "colorCode": "#808000",
+        "image": "/products/shirt-slim-3.png"
+      }
+    ],
     "rating": 4.2
   },
   {
@@ -29,10 +64,25 @@
     "category": "shirts",
     "price": 2199,
     "discount": 0,
-    "image": "/products/shirt-slim-3.png",
     "description": "Slim fit dress shirt in premium cotton. Spread collar and single cuff. Versatile for work and events.",
     "sizes": ["S", "M", "L", "XL"],
-    "colors": ["White", "Black", "Navy"],
+    "variants": [
+      {
+        "color": "White",
+        "colorCode": "#FFFFFF",
+        "image": "/products/shirt-slim-3.png"
+      },
+      {
+        "color": "Black",
+        "colorCode": "#000000",
+        "image": "/products/shirt-oxford-1.png"
+      },
+      {
+        "color": "Navy",
+        "colorCode": "#000080",
+        "image": "/products/shirt-linen-2.png"
+      }
+    ],
     "rating": 4.6
   },
   {
@@ -41,10 +91,25 @@
     "category": "shirts",
     "price": 1599,
     "discount": 25,
-    "image": "/products/shirt-checked-4.png",
     "description": "Lightweight checked shirt with regular fit. Great for weekend wear and layering.",
     "sizes": ["S", "M", "L", "XL", "XXL"],
-    "colors": ["Red Check", "Blue Check", "Grey Check"],
+    "variants": [
+      {
+        "color": "Red Check",
+        "colorCode": "#8B0000",
+        "image": "/products/shirt-checked-4.png"
+      },
+      {
+        "color": "Blue Check",
+        "colorCode": "#00008B",
+        "image": "/products/shirt-oxford-1.png"
+      },
+      {
+        "color": "Grey Check",
+        "colorCode": "#808080",
+        "image": "/products/shirt-linen-2.png"
+      }
+    ],
     "rating": 4.0
   },
   {
@@ -53,10 +118,25 @@
     "category": "shirts",
     "price": 2799,
     "discount": 10,
-    "image": "/products/shirt-denim-5.png",
     "description": "Classic denim shirt in mid-weight cotton. Button closure and chest pockets. Durable and stylish.",
     "sizes": ["M", "L", "XL"],
-    "colors": ["Light Blue", "Dark Indigo", "Black"],
+    "variants": [
+      {
+        "color": "Light Blue",
+        "colorCode": "#ADD8E6",
+        "image": "/products/shirt-denim-5.png"
+      },
+      {
+        "color": "Dark Indigo",
+        "colorCode": "#000033",
+        "image": "/products/shirt-oxford-1.png"
+      },
+      {
+        "color": "Black",
+        "colorCode": "#000000",
+        "image": "/products/shirt-linen-2.png"
+      }
+    ],
     "rating": 4.4
   },
   {
@@ -65,10 +145,25 @@
     "category": "tshirts",
     "price": 599,
     "discount": 30,
-    "image": "/products/tshirt-crew-6.png",
     "description": "Soft 100% cotton crew neck tee. Regular fit. Everyday essential in solid colours.",
     "sizes": ["S", "M", "L", "XL", "XXL"],
-    "colors": ["White", "Black", "Grey", "Navy", "Maroon"],
+    "variants": [
+      {
+        "color": "White",
+        "colorCode": "#FFFFFF",
+        "image": "/products/tshirt-crew-6.png"
+      },
+      {
+        "color": "Black",
+        "colorCode": "#000000",
+        "image": "/products/tshirt-vneck-7.png"
+      },
+      {
+        "color": "Grey",
+        "colorCode": "#808080",
+        "image": "/products/tshirt-graphic-8.png"
+      }
+    ],
     "rating": 4.5
   },
   {
@@ -77,10 +172,25 @@
     "category": "tshirts",
     "price": 1299,
     "discount": 20,
-    "image": "/products/tshirt-vneck-7.png",
     "description": "Pack of 2 premium combed cotton V-neck tees. Smooth finish, minimal shrinkage.",
     "sizes": ["S", "M", "L", "XL"],
-    "colors": ["Black", "White", "Grey"],
+    "variants": [
+      {
+        "color": "Black",
+        "colorCode": "#000000",
+        "image": "/products/tshirt-vneck-7.png"
+      },
+      {
+        "color": "White",
+        "colorCode": "#FFFFFF",
+        "image": "/products/tshirt-crew-6.png"
+      },
+      {
+        "color": "Grey",
+        "colorCode": "#808080",
+        "image": "/products/tshirt-graphic-8.png"
+      }
+    ],
     "rating": 4.3
   },
   {
@@ -89,10 +199,25 @@
     "category": "tshirts",
     "price": 899,
     "discount": 15,
-    "image": "/products/tshirt-graphic-8.png",
     "description": "Oversized fit tee with subtle graphic print. 220 GSM cotton. Street-style ready.",
     "sizes": ["M", "L", "XL", "XXL"],
-    "colors": ["Black", "White", "Olive"],
+    "variants": [
+      {
+        "color": "Black",
+        "colorCode": "#000000",
+        "image": "/products/tshirt-graphic-8.png"
+      },
+      {
+        "color": "White",
+        "colorCode": "#FFFFFF",
+        "image": "/products/tshirt-crew-6.png"
+      },
+      {
+        "color": "Olive",
+        "colorCode": "#808000",
+        "image": "/products/tshirt-vneck-7.png"
+      }
+    ],
     "rating": 4.1
   },
   {
@@ -101,10 +226,25 @@
     "category": "tshirts",
     "price": 799,
     "discount": 0,
-    "image": "/products/tshirt-polo-9.jpg",
     "description": "Classic polo with ribbed collar. Piqué cotton blend. Smart casual staple.",
     "sizes": ["S", "M", "L", "XL"],
-    "colors": ["Navy", "Black", "Burgundy", "White"],
+    "variants": [
+      {
+        "color": "Navy",
+        "colorCode": "#000080",
+        "image": "/products/tshirt-polo-9.jpg"
+      },
+      {
+        "color": "Black",
+        "colorCode": "#000000",
+        "image": "/products/tshirt-crew-6.png"
+      },
+      {
+        "color": "White",
+        "colorCode": "#FFFFFF",
+        "image": "/products/tshirt-vneck-7.png"
+      }
+    ],
     "rating": 4.4
   },
   {
@@ -113,10 +253,25 @@
     "category": "tshirts",
     "price": 949,
     "discount": 10,
-    "image": "/products/tshirt-henley-10.jpg",
     "description": "Henley neck with button placket. Soft cotton with subtle stripes. Relaxed fit.",
     "sizes": ["S", "M", "L", "XL"],
-    "colors": ["Navy Stripes", "Grey Stripes", "Black"],
+    "variants": [
+      {
+        "color": "Navy Stripes",
+        "colorCode": "#2C3E50",
+        "image": "/products/tshirt-henley-10.jpg"
+      },
+      {
+        "color": "Grey Stripes",
+        "colorCode": "#7F8C8D",
+        "image": "/products/tshirt-crew-6.png"
+      },
+      {
+        "color": "Black",
+        "colorCode": "#000000",
+        "image": "/products/tshirt-vneck-7.png"
+      }
+    ],
     "rating": 4.2
   },
   {
@@ -125,10 +280,25 @@
     "category": "jeans",
     "price": 2999,
     "discount": 25,
-    "image": "/products/jeans-slim-11.jpg",
     "description": "Slim fit jeans with 2% elastane for comfort. Mid-rise, five-pocket style. Durable denim.",
     "sizes": ["28", "30", "32", "34", "36"],
-    "colors": ["Dark Blue", "Light Blue", "Black"],
+    "variants": [
+      {
+        "color": "Dark Blue",
+        "colorCode": "#00008B",
+        "image": "/products/jeans-slim-11.jpg"
+      },
+      {
+        "color": "Light Blue",
+        "colorCode": "#ADD8E6",
+        "image": "/products/jeans-regular-12.jpg"
+      },
+      {
+        "color": "Black",
+        "colorCode": "#000000",
+        "image": "/products/jeans-tapered-13.jpg"
+      }
+    ],
     "rating": 4.6
   },
   {
@@ -137,10 +307,25 @@
     "category": "jeans",
     "price": 2499,
     "discount": 20,
-    "image": "/products/jeans-regular-12.jpg",
     "description": "Timeless regular fit jeans. 100% cotton denim. Straight leg, versatile for daily wear.",
     "sizes": ["30", "32", "34", "36", "38"],
-    "colors": ["Indigo", "Black", "Grey"],
+    "variants": [
+      {
+        "color": "Indigo",
+        "colorCode": "#4B0082",
+        "image": "/products/jeans-regular-12.jpg"
+      },
+      {
+        "color": "Black",
+        "colorCode": "#000000",
+        "image": "/products/jeans-slim-11.jpg"
+      },
+      {
+        "color": "Grey",
+        "colorCode": "#808080",
+        "image": "/products/jeans-tapered-13.jpg"
+      }
+    ],
     "rating": 4.5
   },
   {
@@ -149,10 +334,25 @@
     "category": "jeans",
     "price": 3299,
     "discount": 15,
-    "image": "/products/jeans-tapered-13.jpg",
     "description": "Slim tapered leg with stretch. Modern fit from hip to ankle. Easy movement.",
     "sizes": ["28", "30", "32", "34"],
-    "colors": ["Dark Indigo", "Black", "Mid Blue"],
+    "variants": [
+      {
+        "color": "Dark Indigo",
+        "colorCode": "#000033",
+        "image": "/products/jeans-tapered-13.jpg"
+      },
+      {
+        "color": "Black",
+        "colorCode": "#000000",
+        "image": "/products/jeans-slim-11.jpg"
+      },
+      {
+        "color": "Mid Blue",
+        "colorCode": "#0000CD",
+        "image": "/products/jeans-regular-12.jpg"
+      }
+    ],
     "rating": 4.4
   },
   {
@@ -161,10 +361,25 @@
     "category": "jeans",
     "price": 2799,
     "discount": 10,
-    "image": "/products/jeans-carpenter-14.jpg",
     "description": "Relaxed fit with utility pockets. Heavy-duty denim. Workwear inspired.",
     "sizes": ["30", "32", "34", "36"],
-    "colors": ["Light Blue", "Dark Blue", "Black"],
+    "variants": [
+      {
+        "color": "Light Blue",
+        "colorCode": "#ADD8E6",
+        "image": "/products/jeans-carpenter-14.jpg"
+      },
+      {
+        "color": "Dark Blue",
+        "colorCode": "#00008B",
+        "image": "/products/jeans-slim-11.jpg"
+      },
+      {
+        "color": "Black",
+        "colorCode": "#000000",
+        "image": "/products/jeans-regular-12.jpg"
+      }
+    ],
     "rating": 4.0
   },
   {
@@ -173,10 +388,20 @@
     "category": "jeans",
     "price": 2699,
     "discount": 0,
-    "image": "/products/jeans-ripped-15.jpg",
     "description": "Skinny fit with distressed details. Stretch denim for comfort. Casual street style.",
     "sizes": ["28", "30", "32"],
-    "colors": ["Blue", "Black"],
+    "variants": [
+      {
+        "color": "Blue",
+        "colorCode": "#0000FF",
+        "image": "/products/jeans-ripped-15.jpg"
+      },
+      {
+        "color": "Black",
+        "colorCode": "#000000",
+        "image": "/products/jeans-slim-11.jpg"
+      }
+    ],
     "rating": 4.3
   },
   {
@@ -185,10 +410,25 @@
     "category": "trousers",
     "price": 2299,
     "discount": 20,
-    "image": "/products/trouser-chino-16.jpg",
     "description": "Flat front chinos in cotton twill. Smart casual. Belt loops and side pockets.",
     "sizes": ["28", "30", "32", "34", "36"],
-    "colors": ["Beige", "Navy", "Olive", "Grey"],
+    "variants": [
+      {
+        "color": "Beige",
+        "colorCode": "#F5F5DC",
+        "image": "/products/trouser-chino-16.jpg"
+      },
+      {
+        "color": "Navy",
+        "colorCode": "#000080",
+        "image": "/products/trouser-formal-17.jpg"
+      },
+      {
+        "color": "Olive",
+        "colorCode": "#808000",
+        "image": "/products/trouser-jogger-18.jpg"
+      }
+    ],
     "rating": 4.5
   },
   {
@@ -197,10 +437,25 @@
     "category": "trousers",
     "price": 1999,
     "discount": 15,
-    "image": "/products/trouser-formal-17.jpg",
     "description": "Crease-resistant formal trousers. Mid-rise, straight leg. Ideal for office wear.",
     "sizes": ["30", "32", "34", "36", "38"],
-    "colors": ["Black", "Navy", "Grey"],
+    "variants": [
+      {
+        "color": "Black",
+        "colorCode": "#000000",
+        "image": "/products/trouser-formal-17.jpg"
+      },
+      {
+        "color": "Navy",
+        "colorCode": "#000080",
+        "image": "/products/trouser-chino-16.jpg"
+      },
+      {
+        "color": "Grey",
+        "colorCode": "#808080",
+        "image": "/products/trouser-jogger-18.jpg"
+      }
+    ],
     "rating": 4.4
   },
   {
@@ -209,10 +464,30 @@
     "category": "trousers",
     "price": 1499,
     "discount": 25,
-    "image": "/products/trouser-jogger-18.jpg",
     "description": "Slim fit joggers with elasticated waist and cuffs. Soft cotton blend. Casual comfort.",
     "sizes": ["S", "M", "L", "XL"],
-    "colors": ["Black", "Grey", "Navy", "Olive"],
+    "variants": [
+      {
+        "color": "Black",
+        "colorCode": "#000000",
+        "image": "/products/trouser-jogger-18.jpg"
+      },
+      {
+        "color": "Grey",
+        "colorCode": "#808080",
+        "image": "/products/trouser-chino-16.jpg"
+      },
+      {
+        "color": "Navy",
+        "colorCode": "#000080",
+        "image": "/products/trouser-formal-17.jpg"
+      },
+      {
+        "color": "Olive",
+        "colorCode": "#808000",
+        "image": "/products/trouser-pleated-19.jpg"
+      }
+    ],
     "rating": 4.2
   },
   {
@@ -221,10 +496,25 @@
     "category": "trousers",
     "price": 3199,
     "discount": 10,
-    "image": "/products/trouser-pleated-19.jpg",
     "description": "Wide leg trousers with front pleats. Premium fabric. Contemporary formal look.",
     "sizes": ["30", "32", "34", "36"],
-    "colors": ["Black", "Navy", "Charcoal"],
+    "variants": [
+      {
+        "color": "Black",
+        "colorCode": "#000000",
+        "image": "/products/trouser-pleated-19.jpg"
+      },
+      {
+        "color": "Navy",
+        "colorCode": "#000080",
+        "image": "/products/trouser-chino-16.jpg"
+      },
+      {
+        "color": "Charcoal",
+        "colorCode": "#36454F",
+        "image": "/products/trouser-formal-17.jpg"
+      }
+    ],
     "rating": 4.3
   },
   {
@@ -233,10 +523,30 @@
     "category": "trousers",
     "price": 2499,
     "discount": 0,
-    "image": "/products/trouser-cargo-20.jpg",
     "description": "Utility cargo trousers with multiple pockets. Durable cotton. Functional and stylish.",
     "sizes": ["28", "30", "32", "34", "36"],
-    "colors": ["Olive", "Black", "Khaki", "Grey"],
+    "variants": [
+      {
+        "color": "Olive",
+        "colorCode": "#808000",
+        "image": "/products/trouser-cargo-20.jpg"
+      },
+      {
+        "color": "Black",
+        "colorCode": "#000000",
+        "image": "/products/trouser-chino-16.jpg"
+      },
+      {
+        "color": "Khaki",
+        "colorCode": "#F0E68C",
+        "image": "/products/trouser-formal-17.jpg"
+      },
+      {
+        "color": "Grey",
+        "colorCode": "#808080",
+        "image": "/products/trouser-jogger-18.jpg"
+      }
+    ],
     "rating": 4.1
   }
 ]
