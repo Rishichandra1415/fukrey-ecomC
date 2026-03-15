@@ -9,6 +9,8 @@ const HERO_SLIDES = [
   "/hero-banner.jpg",
   "/hero-banner-2.jpg",
   "/hero-banner-3.jpg",
+  "/hero-banner-4.png",
+  "/hero-banner-5.png",
 ];
 
 const SLIDE_DURATION_MS = 5000;
@@ -30,7 +32,7 @@ export default function HeroSection() {
 
   return (
     <section
-      className="relative w-full min-h-[70vh] sm:min-h-[75vh] md:min-h-[80vh] flex items-center justify-center overflow-hidden"
+      className="relative w-full min-h-[70vh] sm:min-h-[80vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden"
       aria-label="Hero banner"
     >
       {/* 1) Fallback gradient (behind slides) */}
@@ -43,7 +45,7 @@ export default function HeroSection() {
       {HERO_SLIDES.map((src, index) => (
         <div
           key={src}
-          className="absolute inset-0 z-0 bg-cover bg-top bg-no-repeat transition-opacity duration-700 ease-out"
+          className="absolute inset-0 z-0 bg-cover bg-[center_top] bg-no-repeat transition-opacity duration-700 ease-out"
           style={{
             backgroundImage: `url(${src})`,
             opacity: index === currentSlide ? 1 : 0,
@@ -54,9 +56,9 @@ export default function HeroSection() {
         />
       ))}
 
-      {/* 3) Overlay for text readability */}
+      {/* 3) Overlay for text readability - slightly stronger on mobile */}
       <div
-        className="absolute inset-0 z-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70 dark:from-black/70 dark:via-black/60 dark:to-black/80 pointer-events-none"
+        className="absolute inset-0 z-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80 dark:from-black/80 dark:via-black/50 dark:to-black/90 pointer-events-none"
         aria-hidden="true"
       />
 
@@ -66,7 +68,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-4xl font-bold tracking-tight text-white drop-shadow-md sm:text-5xl md:text-6xl lg:text-7xl"
+          className="text-3xl font-bold tracking-tight text-white drop-shadow-xl sm:text-5xl md:text-6xl lg:text-7xl"
         >
           Fukrey – Style for Men
         </motion.h1>
@@ -74,7 +76,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="mt-4 sm:mt-6 text-lg sm:text-xl text-white/90 max-w-xl mx-auto drop-shadow-sm md:text-2xl"
+          className="mt-4 sm:mt-6 text-base sm:text-xl text-white/90 max-w-xl mx-auto drop-shadow-md md:text-2xl"
         >
           New arrivals for modern men
         </motion.p>
@@ -107,10 +109,10 @@ export default function HeroSection() {
             role="tab"
             aria-selected={index === currentSlide}
             aria-label={`Go to slide ${index + 1}`}
-            className={`h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent ${
+            className={`h-1.5 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent ${
               index === currentSlide
                 ? "w-8 bg-white"
-                : "w-2 bg-white/50 hover:bg-white/70"
+                : "w-2.5 bg-white/40 hover:bg-white/60"
             }`}
           />
         ))}

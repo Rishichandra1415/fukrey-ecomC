@@ -6,7 +6,7 @@ import Link from "next/link";
 import productsData from "@/data/products.json";
 import {  Footer } from "@/components";
 import { useCart, useWishlist } from "@/context";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 function StarRating({ rating }) {
   const full = Math.floor(rating);
