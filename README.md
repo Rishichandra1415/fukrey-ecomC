@@ -44,6 +44,8 @@ src/
 | `/` | `app/page.jsx` | Home: hero slider, category cards, New Arrivals grid. |
 | `/products/[category]` | `app/products/[category]/page.jsx` | Category listing (shirts, tshirts, jeans, trousers) with sort. |
 | `/product/[id]` | `app/product/[id]/page.jsx` | Product detail: image, price, sizes, colors, Add to cart, wishlist. |
+| `/cart` | `app/cart/page.jsx` | Shopping cart: list items, update quantity, remove items, summary. |
+| `/search` | `app/search/page.jsx` | Search results: filters products by name based on query string. |
 
 ---
 
@@ -74,6 +76,8 @@ src/
 - **`src/app/page.jsx`** – Home page: HeroSection, category cards, New Arrivals (ProductGrid), Footer.
 - **`src/app/products/[category]/page.jsx`** – Category listing: products filtered by category, sort (price/rating), ProductGrid.
 - **`src/app/product/[id]/page.jsx`** – Product detail: large image, name, price, discount, rating, sizes, colors, description, Add to cart, Add to wishlist. Responsive two-column layout.
+- **`src/app/cart/page.jsx`** – Shopping cart: view items, adjust quantities, remove items, total price summary, checkout button.
+- **`src/app/search/page.jsx`** – Search results: dynamic product filtering by name.
 - **`src/app/globals.css`** – Global styles, Tailwind, Fukrey theme (dark mode, container, scrollbar).
 
 ### Components
@@ -101,12 +105,21 @@ import { Navbar, Footer, HeroSection, Hero, Button, ProductCard } from "@/compon
 
 ### Context
 
-- **`src/context/CartContext.js`** – `CartProvider` and `useCart()` for cart state (`items`, `addItem`, `removeItem`). Use in layout:
+- **`src/context/CartContext.jsx`** – Comprehensive `CartProvider` and `useCart()` for cart state management.
+  - **State:** `cart` (array of items)
+  - **Actions:** `addToCart(product, quantity)`, `removeFromCart(productId)`, `updateQuantity(productId, quantity)`, `clearCart()`
+  - **Computed values:** `totalItems`, `totalPrice`
+
+Use in layout:
 
 ```js
 import { CartProvider } from "@/context";
+
 // in layout:
-<CartProvider><body>...</body></CartProvider>
+<CartProvider>
+  <Navbar />
+  {children}
+</CartProvider>
 ```
 
 ### Hooks

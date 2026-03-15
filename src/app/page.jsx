@@ -6,7 +6,8 @@ import {
   HeroSection, 
   CategoryCard, 
   ProductGrid, 
-  Footer 
+  Footer,
+  Transition 
 } from "@/components";
 
 /**

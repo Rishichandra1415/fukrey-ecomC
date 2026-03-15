@@ -28,7 +28,7 @@ function StarRating({ rating }) {
 
 export default function ProductDetailPage({ params }) {
   const { id } = use(params);
-  const { addItem } = useCart();
+  const { addToCart } = useCart();
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [wishlistAdded, setWishlistAdded] = useState(false);
@@ -73,7 +73,7 @@ export default function ProductDetailPage({ params }) {
   const categoryName = product.category.charAt(0).toUpperCase() + product.category.slice(1);
 
   const handleAddToCart = () => {
-    addItem(
+    addToCart(
       { ...product, selectedSize: selectedSize || product.sizes?.[0], selectedColor: selectedColor || product.colors?.[0] },
       1
     );

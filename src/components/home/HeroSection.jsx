@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 /** Add images to public folder: hero-banner.jpg, hero-banner-2.jpg, hero-banner-3.jpg (or use your own paths) */
 const HERO_SLIDES = [
@@ -61,20 +62,35 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h1 className="text-4xl font-bold tracking-tight text-white drop-shadow-md sm:text-5xl md:text-6xl lg:text-7xl">
+        <motion.h1 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-4xl font-bold tracking-tight text-white drop-shadow-md sm:text-5xl md:text-6xl lg:text-7xl"
+        >
           Fukrey – Style for Men
-        </h1>
-        <p className="mt-4 sm:mt-6 text-lg sm:text-xl text-white/90 max-w-xl mx-auto drop-shadow-sm md:text-2xl">
+        </motion.h1>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="mt-4 sm:mt-6 text-lg sm:text-xl text-white/90 max-w-xl mx-auto drop-shadow-sm md:text-2xl"
+        >
           New arrivals for modern men
-        </p>
-        <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-4">
+        </motion.p>
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+          className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-4"
+        >
           <Link
             href="/new-arrivals"
-            className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-base font-semibold text-black shadow-lg transition-all duration-200 hover:bg-white/90 hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent"
+            className="inline-flex items-center justify-center rounded-full bg-white px-8 py-3.5 text-base font-semibold text-black shadow-lg transition-all duration-200 hover:bg-white/90 hover:scale-[1.05] active:scale-[0.95] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent"
           >
             Shop Now
           </Link>
-        </div>
+        </motion.div>
       </div>
 
       {/* Slide indicators (dots) */}
