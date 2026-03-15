@@ -308,17 +308,18 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Mail,
-  Phone,
-  MapPin,
-  Clock,
-  Send,
+import {  Footer } from "@/components";
+import { 
+  Mail, 
+  Phone, 
+  MapPin, 
+  Clock, 
+  Send, 
   CheckCircle,
-  Instagram,
-  Facebook,
-  Twitter,
-  Loader2,
+  Instagram, 
+  Facebook, 
+  Twitter, 
+  Loader2 
 } from "lucide-react";
 
 /* ─────────────────────────────────────────
@@ -358,19 +359,19 @@ function ContactForm() {
   };
 
   const inputBase =
-    "w-full bg-white/[0.04] border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 outline-none focus:border-[#e8d5b0]/60 focus:bg-white/[0.07] transition-all duration-200";
+    "w-full bg-fukrey-muted/5 border border-fukrey-border rounded-xl px-4 py-3 text-sm text-foreground placeholder-fukrey-muted/50 outline-none focus:border-[#e8d5b0]/60 focus:bg-fukrey-muted/10 transition-all duration-200";
 
   if (status === "success") {
     return (
-      <div className="flex flex-col items-center justify-center text-center py-16 px-6 border border-[#e8d5b0]/20 rounded-2xl bg-white/[0.02] h-full min-h-[420px]">
+      <div className="flex flex-col items-center justify-center text-center py-16 px-6 border border-[#e8d5b0]/20 rounded-2xl bg-fukrey-muted/5 h-full min-h-[420px]">
         <CheckCircle className="text-[#e8d5b0] mb-5" size={48} strokeWidth={1.5} />
         <h3
-          className="text-3xl font-black uppercase mb-3"
+          className="text-3xl font-black uppercase mb-3 text-foreground"
           style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
         >
           Message Sent!
         </h3>
-        <p className="text-white/50 text-sm max-w-xs leading-relaxed mb-8">
+        <p className="text-fukrey-muted text-sm max-w-xs leading-relaxed mb-8">
           Thanks for reaching out. The Fukrey team will get back to you within
           24 hours.
         </p>
@@ -388,7 +389,7 @@ function ContactForm() {
     <form onSubmit={handleSubmit} className="space-y-4">
       <div className="grid sm:grid-cols-2 gap-4">
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs tracking-widest uppercase text-white/40">
+          <label className="text-xs tracking-widest uppercase text-fukrey-muted">
             Name
           </label>
           <input
@@ -402,7 +403,7 @@ function ContactForm() {
           />
         </div>
         <div className="flex flex-col gap-1.5">
-          <label className="text-xs tracking-widest uppercase text-white/40">
+          <label className="text-xs tracking-widest uppercase text-fukrey-muted">
             Email
           </label>
           <input
@@ -418,7 +419,7 @@ function ContactForm() {
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <label className="text-xs tracking-widest uppercase text-white/40">
+        <label className="text-xs tracking-widest uppercase text-fukrey-muted">
           Phone
         </label>
         <input
@@ -432,7 +433,7 @@ function ContactForm() {
       </div>
 
       <div className="flex flex-col gap-1.5">
-        <label className="text-xs tracking-widest uppercase text-white/40">
+        <label className="text-xs tracking-widest uppercase text-fukrey-muted">
           Message
         </label>
         <textarea
@@ -514,7 +515,7 @@ function ContactInfo() {
               <Icon size={16} className="text-[#e8d5b0]" strokeWidth={1.8} />
             </div>
             <div>
-              <p className="text-xs tracking-widest uppercase text-white/35 mb-0.5">
+              <p className="text-xs tracking-widest uppercase text-fukrey-muted/60 mb-0.5">
                 {label}
               </p>
               {href ? (
@@ -522,12 +523,12 @@ function ContactInfo() {
                   href={href}
                   target={href.startsWith("http") ? "_blank" : undefined}
                   rel="noopener noreferrer"
-                  className="text-sm text-white/75 hover:text-[#e8d5b0] transition-colors leading-snug"
+                  className="text-sm text-foreground/80 hover:text-[#e8d5b0] transition-colors leading-snug"
                 >
                   {value}
                 </a>
               ) : (
-                <p className="text-sm text-white/75 leading-snug">{value}</p>
+                <p className="text-sm text-foreground/80 leading-snug">{value}</p>
               )}
             </div>
           </div>
@@ -535,11 +536,11 @@ function ContactInfo() {
       </div>
 
       {/* Divider */}
-      <div className="h-px bg-white/8" />
+      <div className="h-px bg-fukrey-border" />
 
       {/* Social links */}
       <div>
-        <p className="text-xs tracking-[0.3em] uppercase text-white/35 mb-4">
+        <p className="text-xs tracking-[0.3em] uppercase text-fukrey-muted/60 mb-4">
           Follow Us
         </p>
         <div className="flex gap-3">
@@ -550,7 +551,7 @@ function ContactInfo() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/50 hover:border-[#e8d5b0]/50 hover:text-[#e8d5b0] transition-all duration-200"
+              className="w-10 h-10 rounded-full border border-fukrey-border flex items-center justify-center text-fukrey-muted/70 hover:border-[#e8d5b0]/50 hover:text-[#e8d5b0] transition-all duration-200"
             >
               <Icon size={16} strokeWidth={1.8} />
             </a>
@@ -560,7 +561,7 @@ function ContactInfo() {
 
       {/* Badge */}
       <div className="rounded-2xl border border-[#e8d5b0]/15 bg-[#e8d5b0]/[0.04] px-5 py-4">
-        <p className="text-xs text-white/40 leading-relaxed">
+        <p className="text-xs text-fukrey-muted/80 leading-relaxed">
           💬 &nbsp;Average reply time is under{" "}
           <span className="text-[#e8d5b0] font-semibold">24 hours</span>. For
           order issues, drop your order ID in the message.
@@ -577,19 +578,20 @@ function MapSection() {
   return (
     <section className="px-6 pb-24 mx-auto max-w-6xl">
       <div className="mb-6 flex items-center gap-4">
-        <span className="h-px flex-1 bg-white/8" />
-        <p className="text-xs tracking-[0.35em] uppercase text-white/35">
+        <span className="h-px flex-1 bg-fukrey-border" />
+        <p className="text-xs tracking-[0.35em] uppercase text-fukrey-muted/60">
           Find Us In-Store
         </p>
-        <span className="h-px flex-1 bg-white/8" />
+        <span className="h-px flex-1 bg-fukrey-border" />
       </div>
-      <div className="overflow-hidden rounded-2xl border border-white/10 h-64 md:h-80">
+      <div className="overflow-hidden rounded-2xl border border-fukrey-border h-64 md:h-80">
         <iframe
           title="Fukrey Store Location"
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3597.9553461847956!2d85.13756431502!3d25.594095983714!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ed58dce6732867%3A0x4059f39a1ac82f06!2sPatna%2C%20Bihar!5e0!3m2!1sen!2sin!4v1630000000000!5m2!1sen!2sin"
           width="100%"
           height="100%"
-          style={{ border: 0, filter: "grayscale(1) invert(0.9) contrast(0.85)" }}
+          style={{ border: 0 }}
+          className="grayscale contrast-75 dark:invert dark:contrast-100 dark:opacity-80 transition-all duration-700"
           allowFullScreen
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
@@ -604,63 +606,66 @@ function MapSection() {
 ───────────────────────────────────────── */
 export default function ContactPage() {
   return (
-    <main className="bg-[#0a0a0a] text-white min-h-screen font-sans">
+    <div className="bg-background text-foreground min-h-screen font-sans transition-colors duration-200">
 
-      {/* ── Hero ── */}
-      <section className="px-6 pt-28 pb-16 md:pt-36 md:pb-20 text-center">
-        <span className="inline-block mb-5 h-px w-14 bg-[#e8d5b0]" />
-        <p className="mb-3 text-xs tracking-[0.35em] uppercase text-[#e8d5b0]">
-          Get In Touch
-        </p>
-        <h1
-          className="text-[clamp(3rem,9vw,6.5rem)] font-black uppercase leading-none tracking-tight"
-          style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
-        >
-          Contact <span className="text-[#e8d5b0]">Fukrey</span>
-        </h1>
-        <p className="mx-auto mt-6 max-w-md text-sm md:text-base text-white/50 leading-relaxed">
-          Questions, collabs, or just want to say hi — we're always here for it.
-        </p>
-      </section>
+      <main>
+        {/* ── Hero ── */}
+        <section className="px-6 pt-28 pb-16 md:pt-36 md:pb-20 text-center">
+          <span className="inline-block mb-5 h-px w-14 bg-[#e8d5b0]" />
+          <p className="mb-3 text-xs tracking-[0.35em] uppercase text-[#e8d5b0]">
+            Get In Touch
+          </p>
+          <h1
+            className="text-[clamp(3rem,9vw,6.5rem)] font-black uppercase leading-none tracking-tight text-foreground"
+            style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
+          >
+            Contact <span className="text-[#e8d5b0]">Fukrey</span>
+          </h1>
+          <p className="mx-auto mt-6 max-w-md text-sm md:text-base text-fukrey-muted leading-relaxed">
+            Questions, collabs, or just want to say hi — we're always here for it.
+          </p>
+        </section>
 
-      {/* ── Two-column layout ── */}
-      <section className="px-6 pb-24 mx-auto max-w-6xl">
-        <div className="grid lg:grid-cols-[1fr_380px] gap-10 xl:gap-16">
+        {/* ── Two-column layout ── */}
+        <section className="px-6 pb-24 mx-auto max-w-6xl">
+          <div className="grid lg:grid-cols-[1fr_380px] gap-10 xl:gap-16">
 
-          {/* Left – Form */}
-          <div className="border border-white/10 rounded-2xl p-7 md:p-10 bg-white/[0.02]">
-            <p className="text-xs tracking-[0.3em] uppercase text-[#e8d5b0] mb-2">
-              Send a Message
-            </p>
-            <h2
-              className="text-3xl font-black uppercase mb-7"
-              style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
-            >
-              We'd love to hear from you.
-            </h2>
-            <ContactForm />
+            {/* Left – Form */}
+            <div className="border border-fukrey-border rounded-2xl p-7 md:p-10 bg-fukrey-muted/5">
+              <p className="text-xs tracking-[0.3em] uppercase text-[#e8d5b0] mb-2">
+                Send a Message
+              </p>
+              <h2
+                className="text-3xl font-black uppercase mb-7 text-foreground"
+                style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
+              >
+                We'd love to hear from you.
+              </h2>
+              <ContactForm />
+            </div>
+
+            {/* Right – Info */}
+            <div className="border border-fukrey-border rounded-2xl p-7 md:p-10 bg-fukrey-muted/5">
+              <p className="text-xs tracking-[0.3em] uppercase text-[#e8d5b0] mb-2">
+                Our Details
+              </p>
+              <h2
+                className="text-3xl font-black uppercase mb-7 text-foreground"
+                style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
+              >
+                Reach us directly.
+              </h2>
+              <ContactInfo />
+            </div>
+
           </div>
+        </section>
 
-          {/* Right – Info */}
-          <div className="border border-white/10 rounded-2xl p-7 md:p-10 bg-white/[0.02]">
-            <p className="text-xs tracking-[0.3em] uppercase text-[#e8d5b0] mb-2">
-              Our Details
-            </p>
-            <h2
-              className="text-3xl font-black uppercase mb-7"
-              style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
-            >
-              Reach us directly.
-            </h2>
-            <ContactInfo />
-          </div>
+        {/* ── Map ── */}
+        <MapSection />
+      </main>
 
-        </div>
-      </section>
-
-      {/* ── Map ── */}
-      <MapSection />
-
-    </main>
+      <Footer />
+    </div>
   );
 }

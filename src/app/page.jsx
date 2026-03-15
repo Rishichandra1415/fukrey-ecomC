@@ -29,21 +29,21 @@ export default function Home() {
     { title: "Trousers", image: "/images/categories/trousers.png", href: "/products/trousers" },
   ];
 
-  return (
-    <div className="dark flex min-h-screen flex-col bg-fukrey-black">
+  return ( 
+    <div className="flex min-h-screen flex-col">
 
       <main className="flex-1">
         {/* Hero Section */}
         <HeroSection />
 
         {/* Category Cards Section */}
-        <section className="py-16 md:py-24 bg-fukrey-offblack">
+        <section className="py-16 md:py-24 bg-fukrey-bg">
           <div className="container mx-auto px-4">
             <div className="mb-12">
-              <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+              <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
                 Browse Categories
               </h2>
-              <div className="mt-2 h-1 w-20 bg-white" />
+              <div className="mt-2 h-1 w-20 bg-foreground" />
             </div>
             
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">

@@ -16,8 +16,8 @@ export default function CartPage() {
 
   if (cart.length === 0) {
     return (
-      <div className="dark flex min-h-screen flex-col bg-fukrey-black">
-        <main className="flex flex-1 items-center justify-center px-4 py-20">
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
+      <main className="flex-1 items-center justify-center px-4 py-20">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -46,7 +46,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="dark flex min-h-screen flex-col bg-fukrey-black text-white">
+    <div className="flex min-h-screen flex-col bg-background text-foreground transition-colors duration-200">
       <main className="flex-1">
         <div className="container mx-auto px-4 py-8 md:py-16">
           <h1 className="mb-8 text-3xl font-bold tracking-tight sm:text-4xl">Your Cart ({totalItems})</h1>
@@ -63,10 +63,10 @@ export default function CartPage() {
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, scale: 0.95 }}
-                      className="group relative flex flex-col gap-4 rounded-2xl bg-fukrey-gray-900/40 p-4 sm:flex-row sm:items-center sm:gap-6"
+                      className="group relative flex flex-col gap-4 rounded-2xl bg-fukrey-muted/5 p-4 sm:flex-row sm:items-center sm:gap-6 border border-fukrey-border/50"
                     >
                       {/* Product Image */}
-                      <div className="relative aspect-[4/5] w-24 flex-shrink-0 overflow-hidden rounded-xl bg-fukrey-gray-900 sm:w-32">
+                      <div className="relative aspect-[4/5] w-24 flex-shrink-0 overflow-hidden rounded-xl bg-fukrey-muted/10 sm:w-32">
                         <Image
                           src={item.image || "/products/placeholder.png"}
                           alt={item.name}
@@ -79,10 +79,10 @@ export default function CartPage() {
                       <div className="flex flex-1 flex-col">
                         <div className="flex justify-between">
                           <div>
-                            <h3 className="text-lg font-semibold hover:text-fukrey-gray-300 transition-colors">
+                            <h3 className="text-lg font-semibold hover:text-fukrey-muted transition-colors">
                               <Link href={`/product/${item.id}`}>{item.name}</Link>
                             </h3>
-                            <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm text-fukrey-gray-500">
+                            <div className="mt-1 flex flex-wrap gap-x-4 gap-y-1 text-sm text-fukrey-muted">
                               {item.selectedSize && <span>Size: {item.selectedSize}</span>}
                               {item.selectedColor && <span>Color: {item.selectedColor}</span>}
                             </div>
@@ -92,11 +92,11 @@ export default function CartPage() {
 
                         <div className="mt-6 flex items-center justify-between sm:mt-auto">
                           {/* Quantity Selector */}
-                          <div className="flex items-center rounded-lg border border-white/10 p-1">
+                          <div className="flex items-center rounded-lg border border-fukrey-border p-1">
                             <button
                               onClick={() => updateQuantity(item.id, item.selectedSize, item.selectedColor, item.quantity - 1)}
                               disabled={item.quantity <= 1}
-                              className="flex h-8 w-8 items-center justify-center rounded-md hover:bg-white/5 disabled:opacity-30"
+                              className="flex h-8 w-8 items-center justify-center rounded-md hover:bg-fukrey-muted/10 disabled:opacity-30"
                               aria-label="Decrease quantity"
                             >
                               -
@@ -104,7 +104,7 @@ export default function CartPage() {
                             <span className="w-10 text-center text-sm font-medium">{item.quantity}</span>
                             <button
                               onClick={() => updateQuantity(item.id, item.selectedSize, item.selectedColor, item.quantity + 1)}
-                              className="flex h-8 w-8 items-center justify-center rounded-md hover:bg-white/5"
+                              className="flex h-8 w-8 items-center justify-center rounded-md hover:bg-fukrey-muted/10"
                               aria-label="Increase quantity"
                             >
                               +
@@ -114,7 +114,7 @@ export default function CartPage() {
                           {/* Remove Button */}
                           <button
                             onClick={() => removeFromCart(item.id, item.selectedSize, item.selectedColor)}
-                            className="text-xs font-medium uppercase tracking-widest text-fukrey-gray-500 hover:text-red-400 transition-colors"
+                            className="text-xs font-medium uppercase tracking-widest text-fukrey-muted hover:text-red-500 transition-colors"
                           >
                             Remove
                           </button>
@@ -128,19 +128,19 @@ export default function CartPage() {
 
             {/* Summary Section */}
             <div className="lg:col-span-4">
-              <div className="sticky top-24 rounded-2xl bg-white p-6 text-black shadow-xl sm:p-8">
+              <div className="sticky top-24 rounded-2xl bg-fukrey-muted/5 p-6 text-foreground shadow-sm sm:p-8 border border-fukrey-border">
                 <h2 className="text-xl font-bold">Order Summary</h2>
                 
                 <div className="mt-8 space-y-4">
-                  <div className="flex justify-between text-fukrey-gray-600">
+                  <div className="flex justify-between text-fukrey-muted">
                     <span>Subtotal</span>
                     <span>{formatPrice(totalPrice)}</span>
                   </div>
-                  <div className="flex justify-between text-fukrey-gray-600">
+                  <div className="flex justify-between text-fukrey-muted">
                     <span>Shipping</span>
                     <span>{shipping === 0 ? "FREE" : formatPrice(shipping)}</span>
                   </div>
-                  <div className="border-t border-fukrey-gray-100 pt-4">
+                  <div className="border-t border-fukrey-border pt-4">
                     <div className="flex justify-between text-lg font-bold">
                       <span>Total</span>
                       <span>{formatPrice(total)}</span>
@@ -148,11 +148,11 @@ export default function CartPage() {
                   </div>
                 </div>
 
-                <button className="mt-8 w-full rounded-xl bg-black py-4 text-center text-sm font-bold uppercase tracking-widest text-white hover:bg-fukrey-gray-900 transition-colors focus:ring-2 focus:ring-black focus:ring-offset-2">
+                <button className="mt-8 w-full rounded-xl bg-foreground py-4 text-center text-sm font-bold uppercase tracking-widest text-background hover:opacity-90 transition-opacity focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background">
                   Proceed to Checkout
                 </button>
 
-                <p className="mt-4 text-center text-xs text-fukrey-gray-500">
+                <p className="mt-4 text-center text-xs text-fukrey-muted">
                   Secure checkout with encryption.
                 </p>
               </div>

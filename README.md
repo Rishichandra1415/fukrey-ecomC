@@ -43,9 +43,10 @@ src/
 |-------|------|-------------|
 | `/` | `app/page.jsx` | Home: hero slider, category cards, New Arrivals grid. |
 | `/products/[category]` | `app/products/[category]/page.jsx` | Category listing (shirts, tshirts, jeans, trousers) with sort. |
-| `/product/[id]` | `app/product/[id]/page.jsx` | Product detail: image, price, sizes, colors, Add to cart, wishlist. |
+| `/product/[id]` | `app/product/[id]/page.jsx` | Product detail: image gallery, price, sizes, colors, Add to cart, wishlist. |
 | `/cart` | `app/cart/page.jsx` | Shopping cart: list items, update quantity, remove items, summary. |
-| `/search` | `app/search/page.jsx` | Search results: filters products by name based on query string. |
+| `/search` | `app/search/page.jsx` | Search results: dynamic filter with grid display. |
+| `/wishlist` | `app/wishlist/page.jsx` | Wishlist page: manage saved products, move to cart. |
 
 ---
 
@@ -75,9 +76,10 @@ src/
 - **`src/app/layout.js`** – Root layout: fonts, metadata, `CartProvider`, `Navbar`, and `{children}`.
 - **`src/app/page.jsx`** – Home page: HeroSection, category cards, New Arrivals (ProductGrid), Footer.
 - **`src/app/products/[category]/page.jsx`** – Category listing: products filtered by category, sort (price/rating), ProductGrid.
-- **`src/app/product/[id]/page.jsx`** – Product detail: large image, name, price, discount, rating, sizes, colors, description, Add to cart, Add to wishlist. Responsive two-column layout.
-- **`src/app/cart/page.jsx`** – Shopping cart: view items, adjust quantities, remove items, total price summary, checkout button.
-- **`src/app/search/page.jsx`** – Search results: dynamic product filtering by name.
+- **`src/app/product/[id]/page.jsx`** – Product detail: interactive gallery, name, price, discount, rating, sizes, colors, description, Add to cart, Add to wishlist (centralized context).
+- **`src/app/cart/page.jsx`** – Shopping cart: view items, total price calculation, quantity management.
+- **`src/app/search/page.jsx`** – Search results: dynamic product matching with consistent grid layout.
+- **`src/app/wishlist/page.jsx`** – Wishlist: centralized store for saved items with "Move to Cart" functionality.
 - **`src/app/globals.css`** – Global styles, Tailwind, Fukrey theme (dark mode, container, scrollbar).
 
 ### Components
@@ -85,8 +87,9 @@ src/
 - **`components/layout/Navbar.jsx`** – Sticky navbar: logo (left), Home / New Arrivals (center), search + wishlist + cart (right). Mobile hamburger menu, dark mode support.
 - **`components/layout/Header.js`** – Legacy header; use **Navbar** for the main site header.
 - **`components/layout/Footer.js`** – Site footer; add links and copyright.
-- **`components/product/ProductCard.jsx`** – Single product tile; links to `/product/[id]`; receives `product` prop.
-- **`components/product/ProductGrid.jsx`** – Responsive grid of ProductCards; used on home and category pages.
+- **`components/product/ProductCard.jsx`** – Refined card: Full-card click navigation to details, removal of clutter buttons (AddToCart/Details) for a cleaner UI, independent heart toggle.
+- **`components/product/ProductGrid.jsx`** – Responsive grid of ProductCards used throughout the app.
+- **`components/product/ProductFilter.jsx`** – Premium filtering toolbar with sorting by Price, Rating, and Highest Discount.
 - **`components/cart/CartItem.js`** – One line item in the cart; receives `item` prop.
 - **`components/ui/Button.js`** – Reusable button; `variant`: `primary` | `secondary`.
 - **`components/home/Hero.js`** – Simple hero text block.
@@ -109,6 +112,9 @@ import { Navbar, Footer, HeroSection, Hero, Button, ProductCard } from "@/compon
   - **State:** `cart` (array of items)
   - **Actions:** `addToCart(product, quantity)`, `removeFromCart(productId)`, `updateQuantity(productId, quantity)`, `clearCart()`
   - **Computed values:** `totalItems`, `totalPrice`
+- **`src/context/WishlistContext.jsx`** – Centralized wishlist provider.
+  - **Actions:** `toggleWishlist(product)`, `isInWishlist(productId)`, `moveToCart(product)`
+- **`src/context/ThemeContext.js`** – Professional `ThemeProvider` for system-wide dark mode with local persistence and smooth transitions.
 
 Use in layout:
 
@@ -192,16 +198,13 @@ Single-product page with responsive layout: image and details side-by-side on de
 
 | Element | Description |
 |--------|-------------|
-| **Large product image** | Full-width on mobile; half-width on `lg` and up. Aspect ratio 4:5, rounded, discount badge when applicable. |
-| **Product name** | Heading with category link. |
+| **Image Gallery** | Interactive main image with clickable thumbnails. Smooth fade transitions using Framer Motion. |
+| **Product details** | Heading, category path, description, and premium star rating. |
 | **Price** | INR formatting; original price with strikethrough when discount exists. |
-| **Discount** | Badge on image and discounted price in details. |
-| **Rating** | Star display (e.g. 4.5) with aria label. |
-| **Sizes** | Button group; one size selectable. |
-| **Colors** | Button group; one color selectable. |
-| **Description** | Product copy from data. |
-| **Add to cart** | Uses `useCart()` from `CartProvider`; shows “Added to cart” feedback. |
-| **Add to wishlist** | Toggle state (UI only); can be wired to wishlist context later. |
+| **Sizes** | Selectable button group for sizes. |
+| **Colors** | Selectable button group for colors. |
+| **Add to cart** | Integrated with `CartContext` with real-time feedback. |
+| **Add to wishlist** | Integrated with `WishlistContext`, persists across navigation. |
 
 **Not found:** Invalid `id` shows “Product not found” and a link back home.  
 **Navigation:** Breadcrumb (Home / Category / Product name); “Back to [Category]” link. `ProductCard` links to `/product/[id]`.

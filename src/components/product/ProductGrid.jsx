@@ -21,10 +21,10 @@ export default function ProductGrid({ products = productsData, title }) {
       <div className="container mx-auto px-4">
         {title && (
           <div className="mb-8 md:mb-12">
-            <h2 className="text-3xl font-bold tracking-tight text-white md:text-4xl">
+            <h2 className="text-3xl font-bold tracking-tight text-foreground md:text-4xl">
               {title}
             </h2>
-            <div className="mt-2 h-1 w-20 bg-white" />
+            <div className="mt-2 h-1 w-20 bg-foreground" />
           </div>
         )}
         

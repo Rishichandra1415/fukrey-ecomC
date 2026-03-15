@@ -154,249 +154,254 @@
 // }
 
 
+import {  Footer } from "@/components";
+
 export default function AboutPage() {
   return (
-    <main className="bg-[#0a0a0a] text-white min-h-screen font-sans">
+    <div className="bg-background text-foreground min-h-screen font-sans transition-colors duration-200">
 
-      {/* ── Hero ── */}
-      <section className="relative overflow-hidden px-6 pt-28 pb-24 md:pt-40 md:pb-36 text-center">
-        {/* decorative grain overlay */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-            backgroundSize: "200px 200px",
-          }}
-        />
+      <main>
+        {/* ── Hero ── */}
+        <section className="relative overflow-hidden px-6 pt-28 pb-24 md:pt-40 md:pb-36 text-center">
+          {/* decorative grain overlay */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
+            style={{
+              backgroundImage:
+                "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
+              backgroundSize: "200px 200px",
+            }}
+          />
 
-        {/* accent line */}
-        <span className="inline-block mb-6 h-px w-16 bg-[#e8d5b0] mx-auto" />
+          {/* accent line */}
+          <span className="inline-block mb-6 h-px w-16 bg-[#e8d5b0] mx-auto" />
 
-        <p className="mb-3 text-xs tracking-[0.35em] uppercase text-[#e8d5b0] font-medium">
-          EST. 2024 — Men's Fashion
-        </p>
-
-        <h1
-          className="text-[clamp(3rem,10vw,7rem)] font-black uppercase leading-none tracking-tight"
-          style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
-        >
-          About
-          <br />
-          <span className="text-[#e8d5b0]">Fukrey</span>
-        </h1>
-
-        <p className="mx-auto mt-8 max-w-xl text-base md:text-lg text-white/60 leading-relaxed">
-          Trendy fits. Real prices. Built for the generation that refuses to
-          choose between style and savings.
-        </p>
-      </section>
-
-      {/* ── Brand Story ── */}
-      <section className="px-6 py-20 md:py-28">
-        <div className="mx-auto max-w-5xl grid md:grid-cols-2 gap-12 items-center">
-          {/* left – label + text */}
-          <div>
-            <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#e8d5b0]">
-              Our Story
-            </p>
-            <h2
-              className="text-4xl md:text-5xl font-black uppercase leading-none mb-6"
-              style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
-            >
-              Born from the streets,<br />
-              <span className="text-white/40">built for everyone.</span>
-            </h2>
-            <p className="text-white/60 leading-relaxed mb-4">
-              Fukrey started with a single frustration — why does looking good
-              have to cost so much? We saw young guys settle for boring basics
-              because the cool stuff was always out of reach.
-            </p>
-            <p className="text-white/60 leading-relaxed">
-              So we flipped the script. By cutting out middlemen and obsessing
-              over direct-to-consumer sourcing, we built a brand where trend,
-              comfort, and price finally coexist. No compromises — just the fit.
-            </p>
-          </div>
-
-          {/* right – big pull quote */}
-          <div className="border border-white/10 rounded-2xl p-8 md:p-10 bg-white/[0.03]">
-            <span className="text-6xl text-[#e8d5b0] font-black leading-none">"</span>
-            <p
-              className="text-2xl md:text-3xl font-black uppercase leading-snug mt-2"
-              style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
-            >
-              Style is not a luxury. It's a right.
-            </p>
-            <span className="mt-6 block h-px w-10 bg-[#e8d5b0]" />
-            <p className="mt-4 text-sm text-white/40 tracking-widest uppercase">
-              Fukrey Founders
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Mission ── */}
-      <section className="px-6 py-20 md:py-28 bg-[#111111]">
-        <div className="mx-auto max-w-5xl">
-          <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#e8d5b0]">
-            Our Mission
+          <p className="mb-3 text-xs tracking-[0.35em] uppercase text-[#e8d5b0] font-medium">
+            EST. 2024 — Men's Fashion
           </p>
-          <h2
-            className="text-4xl md:text-6xl font-black uppercase leading-none mb-12 max-w-2xl"
+
+          <h1
+            className="text-[clamp(3rem,10vw,7rem)] font-black uppercase leading-none tracking-tight text-foreground"
             style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
           >
-            Make modern fashion<br />
-            <span className="text-[#e8d5b0]">accessible to every man.</span>
-          </h2>
+            About
+            <br />
+            <span className="text-[#e8d5b0]">Fukrey</span>
+          </h1>
 
-          <div className="grid sm:grid-cols-3 gap-6">
-            {[
-              {
-                num: "01",
-                title: "Affordability First",
-                body: "Every piece is priced so that a college student can build a complete wardrobe without breaking the bank.",
-              },
-              {
-                num: "02",
-                title: "Everyday Confidence",
-                body: "Clothes shouldn't be saved for special occasions. Fukrey is made for Monday mornings and Friday nights alike.",
-              },
-              {
-                num: "03",
-                title: "Real Street Style",
-                body: "We design for the way you actually live — commutes, hangouts, late-night runs. Fashion that works as hard as you do.",
-              },
-            ].map((item) => (
-              <div
-                key={item.num}
-                className="group border border-white/10 rounded-2xl p-6 hover:border-[#e8d5b0]/40 transition-colors duration-300"
+          <p className="mx-auto mt-8 max-w-xl text-base md:text-lg text-fukrey-muted leading-relaxed">
+            Trendy fits. Real prices. Built for the generation that refuses to
+            choose between style and savings.
+          </p>
+        </section>
+
+        {/* ── Brand Story ── */}
+        <section className="px-6 py-20 md:py-28">
+          <div className="mx-auto max-w-5xl grid md:grid-cols-2 gap-12 items-center">
+            {/* left – label + text */}
+            <div>
+              <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#e8d5b0]">
+                Our Story
+              </p>
+              <h2
+                className="text-4xl md:text-5xl font-black uppercase leading-none mb-6 text-foreground"
+                style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
               >
-                <p className="text-[#e8d5b0] text-xs font-bold tracking-widest mb-4">
-                  {item.num}
-                </p>
-                <h3 className="text-lg font-bold mb-3">{item.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{item.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+                Born from the streets,<br />
+                <span className="text-fukrey-muted/40 transition-colors">built for everyone.</span>
+              </h2>
+              <p className="text-fukrey-muted leading-relaxed mb-4">
+                Fukrey started with a single frustration — why does looking good
+                have to cost so much? We saw young guys settle for boring basics
+                because the cool stuff was always out of reach.
+              </p>
+              <p className="text-fukrey-muted leading-relaxed">
+                So we flipped the script. By cutting out middlemen and obsessing
+                over direct-to-consumer sourcing, we built a brand where trend,
+                comfort, and price finally coexist. No compromises — just the fit.
+              </p>
+            </div>
 
-      {/* ── Men's Fashion Focus ── */}
-      <section className="px-6 py-20 md:py-28">
-        <div className="mx-auto max-w-5xl grid md:grid-cols-2 gap-12 items-start">
-          <div>
+            {/* right – big pull quote */}
+            <div className="border border-fukrey-border rounded-2xl p-8 md:p-10 bg-fukrey-muted/5">
+              <span className="text-6xl text-[#e8d5b0] font-black leading-none">"</span>
+              <p
+                className="text-2xl md:text-3xl font-black uppercase leading-snug mt-2 text-foreground"
+                style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
+              >
+                Style is not a luxury. It's a right.
+              </p>
+              <span className="mt-6 block h-px w-10 bg-[#e8d5b0]" />
+              <p className="mt-4 text-sm text-fukrey-muted tracking-widest uppercase">
+                Fukrey Founders
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Mission ── */}
+        <section className="px-6 py-20 md:py-28 bg-fukrey-muted/5 border-y border-fukrey-border">
+          <div className="mx-auto max-w-5xl">
             <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#e8d5b0]">
-              What We Make
+              Our Mission
             </p>
             <h2
-              className="text-4xl md:text-5xl font-black uppercase leading-none mb-6"
+              className="text-4xl md:text-6xl font-black uppercase leading-none mb-12 max-w-2xl text-foreground"
               style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
             >
-              100% Men.<br />
-              <span className="text-white/40">Zero Exceptions.</span>
+              Make modern fashion<br />
+              <span className="text-[#e8d5b0]">accessible to every man.</span>
             </h2>
-            <p className="text-white/60 leading-relaxed">
-              Fukrey is exclusively a men's brand. We go deep so we can go
-              right — obsessing over fit, fabric, and finish for the male form
-              only. From oversized graphic tees to heavyweight hoodies, every
-              category is built around how men actually dress.
-            </p>
-          </div>
 
-          {/* category pills */}
-          <div className="flex flex-wrap gap-3 content-start pt-2 md:pt-10">
-            {[
-              "Graphic Tees",
-              "Hoodies",
-              "Oversized Fits",
-              "Casual Shirts",
-              "Joggers",
-              "Street Jackets",
-              "Cargo Pants",
-              "Co-ords",
-            ].map((cat) => (
-              <span
-                key={cat}
-                className="border border-white/15 rounded-full px-5 py-2 text-sm text-white/70 hover:border-[#e8d5b0] hover:text-[#e8d5b0] transition-colors duration-200 cursor-default"
+            <div className="grid sm:grid-cols-3 gap-6">
+              {[
+                {
+                  num: "01",
+                  title: "Affordability First",
+                  body: "Every piece is priced so that a college student can build a complete wardrobe without breaking the bank.",
+                },
+                {
+                  num: "02",
+                  title: "Everyday Confidence",
+                  body: "Clothes shouldn't be saved for special occasions. Fukrey is made for Monday mornings and Friday nights alike.",
+                },
+                {
+                  num: "03",
+                  title: "Real Street Style",
+                  body: "We design for the way you actually live — commutes, hangouts, late-night runs. Fashion that works as hard as you do.",
+                },
+              ].map((item) => (
+                <div
+                  key={item.num}
+                  className="group border border-fukrey-border rounded-2xl p-6 hover:border-[#e8d5b0]/40 transition-colors duration-300 bg-background"
+                >
+                  <p className="text-[#e8d5b0] text-xs font-bold tracking-widest mb-4">
+                    {item.num}
+                  </p>
+                  <h3 className="text-lg font-bold mb-3 text-foreground">{item.title}</h3>
+                  <p className="text-fukrey-muted text-sm leading-relaxed">{item.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Men's Fashion Focus ── */}
+        <section className="px-6 py-20 md:py-28">
+          <div className="mx-auto max-w-5xl grid md:grid-cols-2 gap-12 items-start">
+            <div>
+              <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#e8d5b0]">
+                What We Make
+              </p>
+              <h2
+                className="text-4xl md:text-5xl font-black uppercase leading-none mb-6 text-foreground"
+                style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
               >
-                {cat}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+                100% Men.<br />
+                <span className="text-fukrey-muted/40 transition-colors">Zero Exceptions.</span>
+              </h2>
+              <p className="text-fukrey-muted leading-relaxed">
+                Fukrey is exclusively a men's brand. We go deep so we can go
+                right — obsessing over fit, fabric, and finish for the male form
+                only. From oversized graphic tees to heavyweight hoodies, every
+                category is built around how men actually dress.
+              </p>
+            </div>
 
-      {/* ── Brand Values ── */}
-      <section className="px-6 py-20 md:py-28 bg-[#111111]">
-        <div className="mx-auto max-w-5xl">
-          <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#e8d5b0]">
-            What We Stand For
+            {/* category pills */}
+            <div className="flex flex-wrap gap-3 content-start pt-2 md:pt-10">
+              {[
+                "Graphic Tees",
+                "Hoodies",
+                "Oversized Fits",
+                "Casual Shirts",
+                "Joggers",
+                "Street Jackets",
+                "Cargo Pants",
+                "Co-ords",
+              ].map((cat) => (
+                <span
+                  key={cat}
+                  className="border border-fukrey-border rounded-full px-5 py-2 text-sm text-fukrey-muted/70 hover:border-[#e8d5b0] hover:text-[#e8d5b0] transition-colors duration-200 cursor-default"
+                >
+                  {cat}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── Brand Values ── */}
+        <section className="px-6 py-20 md:py-28 bg-fukrey-muted/5 border-t border-fukrey-border">
+          <div className="mx-auto max-w-5xl">
+            <p className="mb-4 text-xs tracking-[0.3em] uppercase text-[#e8d5b0]">
+              What We Stand For
+            </p>
+            <h2
+              className="text-4xl md:text-6xl font-black uppercase leading-none mb-14 text-foreground"
+              style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
+            >
+              Our Values
+            </h2>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {[
+                {
+                  icon: "₹",
+                  title: "Affordability",
+                  body: "Dope fits that don't drain your wallet.",
+                },
+                {
+                  icon: "◻",
+                  title: "Simplicity",
+                  body: "Clean designs. No clutter. Just the essentials done right.",
+                },
+                {
+                  icon: "✦",
+                  title: "Everyday Style",
+                  body: "Fashion for real life, not just the 'gram.",
+                },
+                {
+                  icon: "↑",
+                  title: "Confidence",
+                  body: "Wear it and own the room. That's the Fukrey effect.",
+                },
+              ].map((v) => (
+                <div
+                  key={v.title}
+                  className="bg-background border border-fukrey-border rounded-2xl p-6 hover:border-[#e8d5b0]/40 transition-colors duration-300"
+                >
+                  <span className="text-3xl text-[#e8d5b0] block mb-4">{v.icon}</span>
+                  <h3 className="font-bold text-base mb-2 text-foreground">{v.title}</h3>
+                  <p className="text-fukrey-muted text-sm leading-relaxed">{v.body}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ── CTA Footer Band ── */}
+        <section className="px-6 py-20 text-center border-t border-fukrey-border bg-background">
+          <p className="text-xs tracking-[0.35em] uppercase text-[#e8d5b0] mb-4">
+            Ready to upgrade?
           </p>
           <h2
-            className="text-4xl md:text-6xl font-black uppercase leading-none mb-14"
+            className="text-4xl md:text-6xl font-black uppercase mb-8 text-foreground"
             style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
           >
-            Our Values
+            Shop the new drop.
           </h2>
+          <a
+            href="/shop"
+            className="inline-block bg-[#e8d5b0] text-[#0a0a0a] font-bold text-sm tracking-widest uppercase px-10 py-4 rounded-full hover:bg-black hover:text-white transition-colors duration-200"
+          >
+            Explore Collection →
+          </a>
+        </section>
+      </main>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {[
-              {
-                icon: "₹",
-                title: "Affordability",
-                body: "Dope fits that don't drain your wallet.",
-              },
-              {
-                icon: "◻",
-                title: "Simplicity",
-                body: "Clean designs. No clutter. Just the essentials done right.",
-              },
-              {
-                icon: "✦",
-                title: "Everyday Style",
-                body: "Fashion for real life, not just the 'gram.",
-              },
-              {
-                icon: "↑",
-                title: "Confidence",
-                body: "Wear it and own the room. That's the Fukrey effect.",
-              },
-            ].map((v) => (
-              <div
-                key={v.title}
-                className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:bg-white/[0.06] transition-colors duration-300"
-              >
-                <span className="text-3xl text-[#e8d5b0] block mb-4">{v.icon}</span>
-                <h3 className="font-bold text-base mb-2">{v.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{v.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA Footer Band ── */}
-      <section className="px-6 py-20 text-center border-t border-white/10">
-        <p className="text-xs tracking-[0.35em] uppercase text-[#e8d5b0] mb-4">
-          Ready to upgrade?
-        </p>
-        <h2
-          className="text-4xl md:text-6xl font-black uppercase mb-8"
-          style={{ fontFamily: "'Bebas Neue', 'Arial Black', sans-serif" }}
-        >
-          Shop the new drop.
-        </h2>
-        <a
-          href="/shop"
-          className="inline-block bg-[#e8d5b0] text-[#0a0a0a] font-bold text-sm tracking-widest uppercase px-10 py-4 rounded-full hover:bg-white transition-colors duration-200"
-        >
-          Explore Collection →
-        </a>
-      </section>
-
-    </main>
+      <Footer />
+    </div>
   );
 }

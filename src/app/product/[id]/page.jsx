@@ -4,8 +4,8 @@ import { use, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import productsData from "@/data/products.json";
-import { Footer } from "@/components";
-import { useCart } from "@/context";
+import {  Footer } from "@/components";
+import { useCart, useWishlist } from "@/context";
 import { motion } from "framer-motion";
 
 function StarRating({ rating }) {
@@ -29,16 +29,27 @@ function StarRating({ rating }) {
 export default function ProductDetailPage({ params }) {
   const { id } = use(params);
   const { addToCart } = useCart();
+  const { toggleWishlist, isInWishlist } = useWishlist();
   const [selectedSize, setSelectedSize] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
-  const [wishlistAdded, setWishlistAdded] = useState(false);
   const [addedToCart, setAddedToCart] = useState(false);
+  const [activeImage, setActiveImage] = useState(0);
 
   const product = productsData.find((p) => p.id === id);
 
+  // Mock gallery images (since we only have one per product in products.json)
+  const productImages = product 
+    ? [
+        product.image,
+        "/products/placeholder.png",
+        product.image,
+        "/products/placeholder.png"
+      ]
+    : [];
+
   if (!product) {
     return (
-      <div className="dark flex min-h-screen flex-col bg-fukrey-black">
+      <div className="flex min-h-screen flex-col bg-background">
         <main className="flex flex-1 items-center justify-center px-4 py-20">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-white">Product not found</h1>
@@ -82,20 +93,20 @@ export default function ProductDetailPage({ params }) {
   };
 
   return (
-    <div className="dark flex min-h-screen flex-col bg-fukrey-black">
+    <div className="flex min-h-screen flex-col bg-background transition-colors duration-200">
       <main className="flex-1">
         <div className="container mx-auto px-4 py-8 md:py-12 lg:py-16">
           {/* Breadcrumb */}
-          <nav className="mb-6 flex text-xs font-medium uppercase tracking-widest text-fukrey-gray-500">
-            <Link href="/" className="hover:text-white transition-colors">
+          <nav className="mb-6 flex text-xs font-medium uppercase tracking-widest text-fukrey-muted">
+            <Link href="/" className="hover:text-foreground transition-colors">
               Home
             </Link>
             <span className="mx-2">/</span>
-            <Link href={`/products/${product.category}`} className="hover:text-white transition-colors">
+            <Link href={`/products/${product.category}`} className="hover:text-foreground transition-colors">
               {categoryName}
             </Link>
             <span className="mx-2">/</span>
-            <span className="text-white truncate max-w-[120px] sm:max-w-none">{product.name}</span>
+            <span className="text-foreground truncate max-w-[120px] sm:max-w-none">{product.name}</span>
           </nav>
 
           <motion.div
@@ -104,26 +115,63 @@ export default function ProductDetailPage({ params }) {
             transition={{ duration: 0.4 }}
             className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12 xl:gap-16"
           >
-            {/* Large product image */}
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-fukrey-gray-900">
-              <Image
-                src={product.image || "/products/placeholder.png"}
-                alt={product.name}
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                className="object-cover"
-                priority
-              />
-              {product.discount > 0 && (
-                <span className="absolute left-4 top-4 rounded-full bg-white px-3 py-1 text-sm font-semibold text-black">
-                  {product.discount}% OFF
-                </span>
-              )}
+            {/* Product Gallery */}
+            <div className="flex flex-col gap-4">
+              {/* Main Image */}
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-fukrey-muted/5 border border-fukrey-border">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeImage}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="h-full w-full"
+                  >
+                    <Image
+                      src={productImages[activeImage] || "/products/placeholder.png"}
+                      alt={`${product.name} - Image ${activeImage + 1}`}
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover"
+                      priority
+                    />
+                  </motion.div>
+                </AnimatePresence>
+                
+                {product.discount > 0 && (
+                  <span className="absolute left-4 top-4 z-10 rounded-full bg-foreground px-3 py-1 text-sm font-semibold text-background">
+                    {product.discount}% OFF
+                  </span>
+                )}
+              </div>
+
+              {/* Thumbnails */}
+              <div className="flex gap-3 overflow-x-auto pb-2">
+                {productImages.map((img, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setActiveImage(index)}
+                    className={`relative aspect-[4/5] w-20 flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all ${
+                      activeImage === index 
+                        ? "border-foreground" 
+                        : "border-fukrey-border opacity-60 hover:opacity-100"
+                    }`}
+                  >
+                    <Image
+                      src={img}
+                      alt={`Thumbnail ${index + 1}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </button>
+                ))}
+              </div>
             </div>
 
             {/* Product details */}
             <div className="flex flex-col">
-              <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+              <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
                 {product.name}
               </h1>
 
@@ -131,7 +179,7 @@ export default function ProductDetailPage({ params }) {
                 <StarRating rating={product.rating} />
                 <Link
                   href={`/products/${product.category}`}
-                  className="text-sm text-fukrey-gray-400 hover:text-white transition-colors"
+                  className="text-sm text-fukrey-muted hover:text-foreground transition-colors"
                 >
                   {categoryName}
                 </Link>
@@ -141,21 +189,21 @@ export default function ProductDetailPage({ params }) {
               <div className="mt-6 flex flex-wrap items-baseline gap-3">
                 {discountedPrice ? (
                   <>
-                    <span className="text-2xl font-bold text-white sm:text-3xl">{discountedPrice}</span>
-                    <span className="text-lg text-fukrey-gray-500 line-through">{priceFormatted}</span>
+                    <span className="text-2xl font-bold text-foreground sm:text-3xl">{discountedPrice}</span>
+                    <span className="text-lg text-fukrey-muted line-through">{priceFormatted}</span>
                   </>
                 ) : (
-                  <span className="text-2xl font-bold text-white sm:text-3xl">{priceFormatted}</span>
+                  <span className="text-2xl font-bold text-foreground sm:text-3xl">{priceFormatted}</span>
                 )}
               </div>
 
               {/* Description */}
-              <p className="mt-6 text-fukrey-gray-400 leading-relaxed">{product.description}</p>
+              <p className="mt-6 text-fukrey-muted leading-relaxed">{product.description}</p>
 
               {/* Sizes */}
               {product.sizes?.length > 0 && (
                 <div className="mt-8">
-                  <p className="mb-3 text-sm font-medium text-white">Size</p>
+                  <p className="mb-3 text-sm font-medium text-foreground">Size</p>
                   <div className="flex flex-wrap gap-2">
                     {product.sizes.map((size) => (
                       <button
@@ -164,8 +212,8 @@ export default function ProductDetailPage({ params }) {
                         onClick={() => setSelectedSize(size)}
                         className={`min-w-[2.75rem] rounded-lg border px-4 py-2.5 text-sm font-medium transition-colors ${
                           selectedSize === size
-                            ? "border-white bg-white text-black"
-                            : "border-white/20 text-white hover:border-white/40"
+                            ? "border-foreground bg-foreground text-background"
+                            : "border-fukrey-border text-foreground hover:border-foreground/40"
                         }`}
                       >
                         {size}
@@ -178,7 +226,7 @@ export default function ProductDetailPage({ params }) {
               {/* Colors */}
               {product.colors?.length > 0 && (
                 <div className="mt-6">
-                  <p className="mb-3 text-sm font-medium text-white">Color</p>
+                  <p className="mb-3 text-sm font-medium text-foreground">Color</p>
                   <div className="flex flex-wrap gap-2">
                     {product.colors.map((color) => (
                       <button
@@ -187,8 +235,8 @@ export default function ProductDetailPage({ params }) {
                         onClick={() => setSelectedColor(color)}
                         className={`rounded-lg border px-4 py-2.5 text-sm font-medium transition-colors ${
                           selectedColor === color
-                            ? "border-white bg-white text-black"
-                            : "border-white/20 text-white hover:border-white/40"
+                            ? "border-foreground bg-foreground text-background"
+                            : "border-fukrey-border text-foreground hover:border-foreground/40"
                         }`}
                       >
                         {color}
@@ -203,26 +251,26 @@ export default function ProductDetailPage({ params }) {
                 <button
                   type="button"
                   onClick={handleAddToCart}
-                  className="flex-1 rounded-xl bg-white py-3.5 px-6 text-base font-semibold text-black transition-colors hover:bg-fukrey-gray-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-fukrey-black"
+                  className="flex-1 rounded-xl bg-foreground py-3.5 px-6 text-base font-semibold text-background transition-colors hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background"
                 >
                   {addedToCart ? "Added to cart" : "Add to cart"}
                 </button>
                 <button
                   type="button"
-                  onClick={() => setWishlistAdded(!wishlistAdded)}
-                  className={`inline-flex flex-1 items-center justify-center gap-2 rounded-xl border py-3.5 px-6 text-base font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-fukrey-black ${
-                    wishlistAdded
-                      ? "border-amber-500 bg-amber-500/10 text-amber-500"
-                      : "border-white/20 text-white hover:border-white/40"
+                  onClick={() => toggleWishlist(product)}
+                  className={`inline-flex flex-1 items-center justify-center gap-2 rounded-xl border py-3.5 px-6 text-base font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-foreground focus:ring-offset-2 focus:ring-offset-background ${
+                    isInWishlist(product.id)
+                      ? "border-amber-500 bg-amber-500/10 text-amber-600 dark:text-amber-500"
+                      : "border-fukrey-border text-foreground hover:border-foreground/40"
                   }`}
                 >
-                  {wishlistAdded ? "✓ In wishlist" : "Add to wishlist"}
+                  {isInWishlist(product.id) ? "✓ In wishlist" : "Add to wishlist"}
                 </button>
               </div>
 
               <Link
                 href={`/products/${product.category}`}
-                className="mt-6 inline-block text-sm font-medium text-fukrey-gray-400 hover:text-white transition-colors"
+                className="mt-6 inline-block text-sm font-medium text-fukrey-muted hover:text-foreground transition-colors"
               >
                 ← Back to {categoryName}
               </Link>

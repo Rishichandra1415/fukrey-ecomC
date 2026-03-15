@@ -19,17 +19,17 @@
 /* Light mode (default) */
 :root {
   --fukrey-bg: #ffffff;
-  --fukrey-fg: #171717;
-  --fukrey-muted: #737373;
-  --fukrey-border: #e5e5e5;
+  --fukrey-fg: #09090b;
+  --fukrey-muted: #71717a;
+  --fukrey-border: #e4e4e7;
 }
 
 /* Dark mode (when .dark is on html or a parent) */
 .dark {
-  --fukrey-bg: #0a0a0a;
-  --fukrey-fg: #ffffff;
-  --fukrey-muted: #a3a3a3;
-  --fukrey-border: #262626;
+  --fukrey-bg: #09090b;
+  --fukrey-fg: #fafafa;
+  --fukrey-muted: #a1a1aa;
+  --fukrey-border: #27272a;
 }
 
 /* Body: background, typography, smooth transitions */

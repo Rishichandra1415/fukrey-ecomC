@@ -4,4 +4,5 @@
 
 export { CartProvider, useCart } from "./CartContext";
 export { WishlistProvider, useWishlist } from "./WishlistContext";
+export { ThemeProvider, useTheme } from "./ThemeContext";
 // Note: Next.js will resolve to .jsx automatically if .js is removed.

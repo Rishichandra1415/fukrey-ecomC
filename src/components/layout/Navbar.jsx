@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect, useMemo, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useCart, useWishlist } from "@/context";
+import { useCart, useWishlist, useTheme } from "@/context";
 import productsData from "@/data/products.json";
 import Image from "next/image";
 
@@ -79,75 +79,101 @@ function ContactIcon({ className }) {
   );
 }
 
+function SunIcon({ className }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l.707.707M6.343 6.343l.707.707M12 8a4 4 0 100 8 4 4 0 000-8z" />
+    </svg>
+  );
+}
+
+function MoonIcon({ className }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+    </svg>
+  );
+}
+
+function ThemeToggle({ className }) {
+  const { theme, toggleTheme, mounted } = useTheme();
+
+  if (!mounted) return <div className={`h-9 w-9 ${className}`} />;
+
+  return (
+    <button
+      onClick={toggleTheme}
+      className={`p-2 rounded-full text-fukrey-muted hover:text-foreground hover:bg-fukrey-muted/10 transition-colors ${className}`}
+      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+    >
+      {theme === "light" ? <MoonIcon className="h-5 w-5" /> : <SunIcon className="h-5 w-5" />}
+    </button>
+  );
+}
+
 function SearchBar({ searchQuery, setSearchQuery, handleSearchSubmit, searchFocused, setSearchFocused, className, inputClassName }) {
   const searchParams = useSearchParams();
   const q = searchParams.get("q");
 
-  // Sync input with URL
   useEffect(() => {
     if (q) {
       setSearchQuery(q);
     }
   }, [q, setSearchQuery]);
 
-  // Live filter products
   const liveResults = useMemo(() => {
     if (!searchQuery.trim() || searchQuery.length < 2) return [];
     const lowerQuery = searchQuery.toLowerCase();
     return productsData
       .filter((p) => p.name.toLowerCase().includes(lowerQuery))
-      .slice(0, 5); // Limit to 5 results
+      .slice(0, 5);
   }, [searchQuery]);
 
   return (
     <div className={`relative ${className}`}>
       <form
         onSubmit={handleSearchSubmit}
-        className={`flex items-center gap-2 rounded-full border bg-white/5 transition-all duration-200 ${
-          searchFocused ? "border-white/20 ring-1 ring-white/10" : "border-white/5"
+        className={`flex items-center gap-2 rounded-full border bg-fukrey-muted/10 transition-all duration-200 ${
+          searchFocused ? "border-fukrey-border ring-1 ring-fukrey-border/50" : "border-fukrey-border/20"
         }`}
       >
-        <SearchIcon className="ml-3 h-4 w-4 text-fukrey-gray-400 shrink-0" />
+        <SearchIcon className="ml-3 h-4 w-4 text-fukrey-muted shrink-0" />
         <input
           type="search"
           placeholder="Search..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className={`py-2 pr-3 bg-transparent text-sm text-white placeholder:text-fukrey-gray-500 outline-none ${inputClassName}`}
+          className={`py-2 pr-3 bg-transparent text-sm text-foreground placeholder:text-fukrey-muted/60 outline-none ${inputClassName}`}
           onFocus={() => setSearchFocused(true)}
-          onBlur={() => setTimeout(() => setSearchFocused(false), 200)} // delay to allow clicks
+          onBlur={() => setTimeout(() => setSearchFocused(false), 200)}
           aria-label="Search products"
         />
       </form>
 
-      {/* Live Results Dropdown */}
       {searchFocused && liveResults.length > 0 && (
-        <div className="absolute top-full right-0 z-[60] mt-2 w-72 sm:w-80 rounded-xl border border-white/10 bg-fukrey-black p-2 shadow-2xl backdrop-blur-xl">
+        <div className="absolute top-full right-0 z-[60] mt-2 w-72 sm:w-80 rounded-xl border border-fukrey-border bg-background p-2 shadow-2xl backdrop-blur-xl">
           <div className="flex flex-col gap-1">
             {liveResults.map((product) => (
               <Link
                 key={product.id}
                 href={`/product/${product.id}`}
-                onMouseDown={(e) => {
-                  e.preventDefault();
-                  // No need for router.push, Link will handle it if we preventDefault on mousedown to keep focus
-                }}
+                onMouseDown={(e) => e.preventDefault()}
                 onClick={() => setSearchFocused(false)}
-                className="flex items-center gap-3 rounded-lg p-2 hover:bg-white/5 transition-colors group"
+                className="flex items-center gap-3 rounded-lg p-2 hover:bg-fukrey-muted/10 transition-colors group"
               >
-                <div className="relative h-12 w-10 shrink-0 overflow-hidden rounded bg-fukrey-gray-900 border border-white/5">
+                <div className="relative h-12 w-10 shrink-0 overflow-hidden rounded bg-fukrey-muted/5 border border-fukrey-border">
                   <Image src={product.image} alt={product.name} fill className="object-cover" />
                 </div>
                 <div className="flex-1 overflow-hidden">
-                  <p className="truncate text-sm font-medium !text-white group-hover:text-white">{product.name}</p>
-                  <p className="text-xs !text-fukrey-gray-400 capitalize">{product.category}</p>
+                  <p className="truncate text-sm font-medium text-foreground">{product.name}</p>
+                  <p className="text-xs text-fukrey-muted capitalize">{product.category}</p>
                 </div>
-                <p className="text-xs font-bold !text-white text-[10px]">₹{product.price}</p>
+                <p className="text-xs font-bold text-foreground">₹{product.price}</p>
               </Link>
             ))}
             <button
               onClick={handleSearchSubmit}
-              className="mt-1 border-t border-white/5 pt-2 text-center text-xs font-semibold !text-fukrey-gray-400 hover:!text-white transition-colors"
+              className="mt-1 border-t border-fukrey-border pt-2 text-center text-xs font-semibold text-fukrey-muted hover:text-foreground transition-colors"
             >
               View all results
             </button>
@@ -166,7 +192,6 @@ export default function Navbar() {
   const { totalItems } = useCart();
   const { totalWishlistItems } = useWishlist();
 
-  // Lock body scroll when mobile menu is open so the page doesn't scroll behind the overlay
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -190,42 +215,38 @@ export default function Navbar() {
     if (searchQuery.trim()) {
       router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
       setMobileMenuOpen(false);
-      // Removed: setSearchQuery(""); to persist input
     }
   };
 
   return (
     <>
       <header
-        className="dark sticky top-0 z-50 w-full border-b border-white/5 bg-fukrey-black/90 backdrop-blur-md supports-[backdrop-filter]:bg-fukrey-black/70 transition-colors duration-200"
+        className="sticky top-0 z-50 w-full border-b border-fukrey-border bg-background/90 backdrop-blur-md supports-[backdrop-filter]:bg-background/70 transition-colors duration-200"
         role="banner"
       >
         <div className="container mx-auto flex h-14 sm:h-16 items-center justify-between gap-4 px-4">
-          {/* Left: Logo */}
           <Link
             href="/"
-            className="shrink-0 text-xl font-bold tracking-tight text-white hover:opacity-80 transition-opacity"
+            className="shrink-0 text-xl font-bold tracking-tight text-foreground hover:opacity-80 transition-opacity"
             aria-label="Fukrey home"
           >
             Fukrey
           </Link>
 
-          {/* Center: Nav links (desktop) */}
           <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
             {navLinks.map(({ href, label }) => (
               <Link
                 key={href}
                 href={href}
-                className="text-sm font-medium text-fukrey-gray-400 hover:text-white transition-colors"
+                className="text-sm font-medium text-fukrey-muted hover:text-foreground transition-colors"
               >
                 {label}
               </Link>
             ))}
           </nav>
 
-          {/* Right: Search, Wishlist, Cart (desktop) */}
           <div className="hidden md:flex items-center gap-3 lg:gap-4">
-            <Suspense fallback={<div className="h-10 w-44 rounded-full bg-white/5 animate-pulse" />}>
+            <Suspense fallback={<div className="h-10 w-44 rounded-full bg-fukrey-muted/10 animate-pulse" />}>
               <SearchBar 
                 searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery}
@@ -237,81 +258,77 @@ export default function Navbar() {
             </Suspense>
             <Link
               href="/wishlist"
-              className="relative p-2 rounded-full text-fukrey-gray-700 hover:text-black hover:bg-fukrey-gray-100 dark:text-fukrey-gray-300 dark:hover:text-white dark:hover:bg-fukrey-gray-800 transition-colors"
+              className="relative p-2 rounded-full text-fukrey-muted hover:text-foreground hover:bg-fukrey-muted/10 transition-colors"
               aria-label={`Wishlist with ${totalWishlistItems} items`}
             >
               <WishlistIcon className="h-5 w-5" />
               {totalWishlistItems > 0 && (
-                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-white text-[10px] font-bold text-black ring-2 ring-fukrey-black">
+                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-foreground text-[10px] font-bold text-background ring-2 ring-background">
                   {totalWishlistItems}
                 </span>
               )}
             </Link>
             <Link
               href="/cart"
-              className="relative p-2 rounded-full text-fukrey-gray-700 hover:text-black hover:bg-fukrey-gray-100 dark:text-fukrey-gray-300 dark:hover:text-white dark:hover:bg-fukrey-gray-800 transition-colors"
+              className="relative p-2 rounded-full text-fukrey-muted hover:text-foreground hover:bg-fukrey-muted/10 transition-colors"
               aria-label={`Cart with ${totalItems} items`}
             >
               <CartIcon className="h-5 w-5" />
               {totalItems > 0 && (
-                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-white text-[10px] font-bold text-black ring-2 ring-fukrey-black">
+                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-foreground text-[10px] font-bold text-background ring-2 ring-background">
                   {totalItems}
                 </span>
               )}
             </Link>
+            <ThemeToggle />
           </div>
 
-          {/* Mobile: Hamburger */}
           <div className="flex md:hidden items-center gap-2">
             <Link
               href="/cart"
-              className="relative p-2 rounded-full text-fukrey-gray-400 hover:text-white transition-colors"
+              className="relative p-2 rounded-full text-fukrey-muted hover:text-foreground transition-colors"
               aria-label={`Cart with ${totalItems} items`}
             >
               <CartIcon className="h-5 w-5" />
               {totalItems > 0 && (
-                <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-white text-[10px] font-bold text-black">
+                <span className="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-foreground text-[10px] font-bold text-background">
                   {totalItems}
                 </span>
               )}
             </Link>
+            <ThemeToggle className="text-fukrey-muted hover:text-foreground hover:bg-fukrey-muted/10" />
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-full text-fukrey-gray-400 hover:bg-white/5 transition-colors"
+              className="p-2 rounded-full text-fukrey-muted hover:bg-fukrey-muted/10 transition-colors"
               aria-expanded={mobileMenuOpen}
               aria-label="Toggle menu"
             >
-              {mobileMenuOpen ? (
-                <CloseIcon className="h-6 w-6" />
-              ) : (
-                <MenuIcon className="h-6 w-6" />
-              )}
+              {mobileMenuOpen ? <CloseIcon className="h-6 w-6" /> : <MenuIcon className="h-6 w-6" />}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Mobile menu: fixed overlay so it doesn't push page content down */}
       <div
         className={`md:hidden fixed inset-0 z-40 transition-opacity duration-300 ease-out ${
           mobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
         aria-hidden={!mobileMenuOpen}
       >
-        {/* Backdrop – taps close menu, blocks scroll */}
         <div
-          className="absolute inset-0 bg-black/60"
+          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
           onClick={() => setMobileMenuOpen(false)}
           aria-hidden="true"
         />
-        {/* Panel – below navbar (h-14 sm:h-16), scrollable if content is long */}
         <div
-          className="absolute left-0 right-0 top-14 sm:top-16 bottom-0 max-h-[calc(100vh-3.5rem)] sm:max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-white/5 bg-fukrey-offblack shadow-xl"
+          className={`absolute left-0 right-0 top-14 sm:top-16 bottom-0 overflow-y-auto border-t border-fukrey-border bg-background shadow-xl transition-transform duration-300 ease-out ${
+            mobileMenuOpen ? "translate-y-0" : "-translate-y-2"
+          }`}
           onClick={(e) => e.stopPropagation()}
         >
           <div className="container mx-auto flex flex-col gap-4 px-4 py-4">
-            <Suspense fallback={<div className="h-12 w-full rounded-lg bg-white/5 animate-pulse" />}>
+            <Suspense fallback={<div className="h-12 w-full rounded-full bg-fukrey-muted/10 animate-pulse" />}>
               <SearchBar 
                 searchQuery={searchQuery}
                 setSearchQuery={setSearchQuery}
@@ -328,7 +345,7 @@ export default function Navbar() {
                   key={href}
                   href={href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2 py-3 text-sm font-medium text-fukrey-gray-300 hover:text-white rounded-lg px-3 transition-colors"
+                  className="flex items-center gap-2 py-3 text-sm font-medium text-fukrey-muted hover:text-foreground rounded-lg px-3 transition-colors"
                 >
                   <Icon className="h-5 w-5" />
                   {label}
@@ -337,14 +354,14 @@ export default function Navbar() {
               <Link
                 href="/wishlist"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-between py-3 text-sm font-medium text-fukrey-gray-300 hover:text-white rounded-lg px-3 transition-colors"
+                className="flex items-center justify-between py-3 text-sm font-medium text-fukrey-muted hover:text-foreground rounded-lg px-3 transition-colors"
               >
                 <div className="flex items-center gap-2">
                   <WishlistIcon className="h-5 w-5" />
                   Wishlist
                 </div>
                 {totalWishlistItems > 0 && (
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white text-[10px] font-bold text-black ring-2 ring-fukrey-offblack">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-foreground text-[10px] font-bold text-background ring-2 ring-background">
                     {totalWishlistItems}
                   </span>
                 )}
