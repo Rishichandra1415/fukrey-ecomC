@@ -1,26 +1,128 @@
 @import "tailwindcss";
+@config "../../tailwind.config.js";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Fukrey: dark mode using class strategy */
+@custom-variant dark (&:where(.dark, .dark *));
 
+/* Theme: Fukrey black & white palette */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: var(--fukrey-bg);
+  --color-foreground: var(--fukrey-fg);
+  --color-fukrey-black: #000000;
+  --color-fukrey-white: #ffffff;
+  --color-fukrey-offblack: #0a0a0a;
+  --color-fukrey-offwhite: #fafafa;
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --default-transition-duration: 200ms;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Light mode (default) */
+:root {
+  --fukrey-bg: #ffffff;
+  --fukrey-fg: #171717;
+  --fukrey-muted: #737373;
+  --fukrey-border: #e5e5e5;
 }
 
+/* Dark mode (when .dark is on html or a parent) */
+.dark {
+  --fukrey-bg: #0a0a0a;
+  --fukrey-fg: #ffffff;
+  --fukrey-muted: #a3a3a3;
+  --fukrey-border: #262626;
+}
+
+/* Body: background, typography, smooth transitions */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--fukrey-bg);
+  color: var(--fukrey-fg);
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition:
+    background-color var(--default-transition-duration) var(--ease-smooth),
+    color var(--default-transition-duration) var(--ease-smooth);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.2;
+  color: var(--fukrey-fg);
+}
+
+h1 { font-size: 2.25rem; }
+h2 { font-size: 1.875rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+p {
+  line-height: 1.6;
+  color: var(--fukrey-fg);
+}
+
+/* Muted text */
+.text-muted {
+  color: var(--fukrey-muted);
+}
+
+/* Scrollbar styling (Fukrey black & white) */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #a3a3a3 transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #a3a3a3;
+  border-radius: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #737373;
+}
+
+.dark *::-webkit-scrollbar-thumb {
+  background-color: #525252;
+}
+
+.dark *::-webkit-scrollbar-thumb:hover {
+  background-color: #737373;
+}
+
+/* Container: centered, responsive padding, max-widths */
+@layer components {
+  .container {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  @media (min-width: 640px) {
+    .container { max-width: 640px; padding-left: 1.5rem; padding-right: 1.5rem; }
+  }
+  @media (min-width: 768px) {
+    .container { max-width: 768px; }
+  }
+  @media (min-width: 1024px) {
+    .container { max-width: 1024px; padding-left: 2rem; padding-right: 2rem; }
+  }
+  @media (min-width: 1280px) {
+    .container { max-width: 1280px; padding-left: 2.5rem; padding-right: 2.5rem; }
+  }
+  @media (min-width: 1400px) {
+    .container { max-width: 1400px; padding-left: 3rem; padding-right: 3rem; }
+  }
 }

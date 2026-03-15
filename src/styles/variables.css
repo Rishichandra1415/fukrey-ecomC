@@ -1,0 +1,8 @@
+/**
+ * CSS variables and design tokens (optional).
+ * Main global styles live in app/globals.css.
+ */
+
+:root {
+  --fukrey-container-max: 1400px;
+}
