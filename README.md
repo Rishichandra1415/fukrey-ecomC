@@ -42,6 +42,8 @@ src/
 | Route | File | Description |
 |-------|------|-------------|
 | `/` | `app/page.jsx` | Home: hero slider, category cards, New Arrivals grid. |
+| `/new-arrivals` | `app/new-arrivals/page.jsx` | **New Arrivals**: Infinite scroll product grid with real-time filtering and sticky desktop sidebar. |
+| `/best-sellers` | `app/best-sellers/page.jsx` | **Best Sellers**: High-conversion page featuring Top Picks, social proof indicators, and quick filter navigation. |
 | `/products/[category]` | `app/products/[category]/page.jsx` | Category listing (shirts, tshirts, jeans, trousers) with sort. |
 | `/product/[id]` | `app/product/[id]/page.jsx` | Product detail: image gallery, price, sizes, colors, Add to cart, wishlist. |
 | `/cart` | `app/cart/page.jsx` | Shopping cart: list items, update quantity, remove items, summary. |
@@ -88,16 +90,19 @@ src/
 - **`components/layout/Header.js`** – Legacy header; use **Navbar** for the main site header.
 - **`components/layout/Footer.js`** – Site footer; add links and copyright.
 - **`components/product/ProductCard.jsx`** – Premium card with interactive features:
+  - **Social Proof**: Dynamic badges (**BEST SELLER**, **TOP PICK**) and real-time markers ("2,000+ bought this week").
+  - **Scarcity Indicators**: "Only X left" warnings for low-stock items to drive conversions.
   - **Image Slider**: Multiple images with smooth transitions and dot indicators.
-  - **Color Selection**: Interactive swatches below the rating (limited to first 3 with a `+N` overflow indicator). High-contrast selection indicator (`border-2 border-black`).
-  - **Select Size Overlay**: "Quick Add" functionality via Cart icon to select sizes directly from the card.
+  - **Color Selection**: Interactive swatches below the rating with overflow indicator.
+  - **Select Size Overlay**: "Quick Add" functionality via Cart icon.
   - **Wishlist Toggle**: Independent heart button for fast saving.
-  - **Toast Notifications**: Real-time feedback for Cart and Wishlist actions using **React Hot Toast**.
+  - **Toast Notifications**: Real-time feedback using **React Hot Toast**.
   - **Full Navigation**: Click anywhere else to view full product details.
-- **`components/product/ProductGrid.jsx`** – Responsive grid of ProductCards used throughout the app.
-- **`components/product/ProductFilter.jsx`** – Premium filtering toolbar with sorting by Price, Rating, and Highest Discount.
-- **`components/cart/CartItem.js`** – One line item in the cart; receives `item` prop.
-- **`components/ui/Button.js`** – Reusable button; `variant`: `primary` | `secondary`.
+- **`components/product/ProductGrid.jsx`** – Responsive grid of ProductCards with **Infinite Scroll** (Intersection Observer) support.
+- **`components/product/SortBar.jsx`** – Sleek, sticky sorting toolbar with dynamic context support (New Arrivals vs. Best Sellers).
+- **`components/product/FilterPanel.jsx`** – Advanced filtering system with category, price, color, size, discount, and rating filters.
+- **`components/product/TopPicks.jsx`** – Premium featured section with horizontal scroll for mobile and award-style labels.
+- **`components/product/QuickFilterBar.jsx`** – Horizontal category navigation for rapid product discovery.
 - **`components/home/Hero.js`** – Simple hero text block.
 - **`components/home/HeroSection.jsx`** – Full-width homepage hero: fashion-style background image, headline “Fukrey – Style for Men”, subtitle “New arrivals for modern men”, Shop Now button. Responsive, Tailwind.
 
@@ -170,6 +175,9 @@ Each product object includes:
 | **category** | string | One of: `shirts`, `tshirts`, `jeans`, `trousers` |
 | **price** | number | Price in INR (e.g. 2499) |
 | **discount** | number | Discount percentage (0–30) |
+| **isBestSeller** | boolean | Flag for high-conversion badges |
+| **salesCount** | string | Text description of sales (e.g., "1.2k+ sold") |
+| **stockLeft** | number | Remaining items for scarcity warnings |
 | **variants** | object[] | Array of color variants: `{ color, colorCode, image }` |
 | **description** | string | Short product description |
 | **sizes** | string[] | Available sizes (e.g. `["S","M","L","XL"]`) |

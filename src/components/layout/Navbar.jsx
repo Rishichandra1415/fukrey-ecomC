@@ -87,6 +87,15 @@ function SunIcon({ className }) {
   );
 }
 
+function FlameIcon({ className }) {
+  return (
+    <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.99 7.99 0 0120 13a7.99 7.99 0 01-2.343 5.657z" />
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.879 16.121A3 3 0 1012.015 11L11 14l-1.121 2.121z" />
+    </svg>
+  );
+}
+
 function MoonIcon({ className }) {
   return (
     <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -162,7 +171,12 @@ function SearchBar({ searchQuery, setSearchQuery, handleSearchSubmit, searchFocu
                 className="flex items-center gap-3 rounded-lg p-2 hover:bg-fukrey-muted/10 transition-colors group"
               >
                 <div className="relative h-12 w-10 shrink-0 overflow-hidden rounded bg-fukrey-muted/5 border border-fukrey-border">
-                  <Image src={product.image} alt={product.name} fill className="object-cover" />
+                  <Image 
+                    src={product.image || product.variants?.[0]?.image || product.variants?.[0]?.images?.[0] || "/products/placeholder.png"} 
+                    alt={product.name} 
+                    fill 
+                    className="object-cover" 
+                  />
                 </div>
                 <div className="flex-1 overflow-hidden">
                   <p className="truncate text-sm font-medium text-foreground">{product.name}</p>
@@ -206,6 +220,7 @@ export default function Navbar() {
   const navLinks = [
     { href: "/", label: "Home", icon: HomeIcon },
     { href: "/new-arrivals", label: "New Arrivals", icon: NewIcon },
+    { href: "/best-sellers", label: "Best Sellers", icon: FlameIcon },
     { href: "/about", label: "About", icon: AboutIcon },
     { href: "/contact", label: "Contact Us", icon: ContactIcon },
   ];

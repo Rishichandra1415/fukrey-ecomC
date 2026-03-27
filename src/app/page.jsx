@@ -5,7 +5,7 @@ import {
   Navbar, 
   HeroSection, 
   CategoryCard, 
-  ProductGrid, 
+  ScrollingProductList, 
   Footer,
   Transition 
 } from "@/components";
@@ -60,9 +60,10 @@ export default function Home() {
         </section>
 
         {/* New Arrivals Section */}
-        <ProductGrid 
+        <ScrollingProductList 
           title="New Arrivals" 
           products={newArrivals} 
+          speed="30s"
         />
         
         {/* Promotion / Feature Section (Optional but good for WOW factor) */}

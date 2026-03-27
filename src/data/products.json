@@ -5,38 +5,45 @@
     "category": "shirts",
     "price": 2499,
     "discount": 20,
+    "isBestSeller": true,
+    "salesCount": "2,450+ bought this month",
+    "stockLeft": 5,
     "description": "Crisp cotton Oxford shirt with button-down collar. Perfect for office and semi-formal occasions. Easy-care fabric.",
     "sizes": ["S", "M", "L", "XL", "XXL"],
     "variants": [
       {
         "color": "White",
         "colorCode": "#FFFFFF",
-        "image": "/products/shirt-oxford-1.png"
+        "images": ["/products/shirt-oxford-1.png", "/products/shirt-linen-2.png", "/products/shirt-slim-3.png"]
       },
       {
         "color": "Light Blue",
         "colorCode": "#ADD8E6",
-        "image": "/products/shirt-linen-2.png"
+        "images": ["/products/shirt-linen-2.png", "/products/shirt-denim-5.png", "/products/shirt-checked-4.png"]
       },
       {
         "color": "Pink",
         "colorCode": "#FFC0CB",
-        "image": "/products/shirt-slim-3.png"
+        "images": ["/products/shirt-slim-3.png", "/products/shirt-oxford-1.png", "/products/shirt-linen-2.png"]
       },
        {
         "color": "yellow",
         "colorCode": "#FFFF00",
-        "image": "/products/shirt-slim-3.png"
+        "images": ["/products/shirt-slim-3.png", "/products/shirt-oxford-1.png", "/products/shirt-linen-2.png"]
       }
     ],
     "rating": 4.5
   },
+
   {
     "id": "2",
     "name": "Linen Blend Casual Shirt",
     "category": "shirts",
     "price": 1899,
     "discount": 15,
+    "isBestSeller": true,
+    "salesCount": "1,800+ bought this month",
+    "stockLeft": 3,
     "description": "Breathable linen-blend shirt for summer. Relaxed fit with chest pocket. Ideal for casual outings.",
     "sizes": ["M", "L", "XL"],
     "variants": [
@@ -62,9 +69,12 @@
     "id": "3",
     "name": "Slim Fit Solid Dress Shirt",
     "category": "shirts",
-    "price": 2199,
-    "discount": 0,
-    "description": "Slim fit dress shirt in premium cotton. Spread collar and single cuff. Versatile for work and events.",
+    "price": 1499,
+    "discount": 10,
+    "isBestSeller": true,
+    "salesCount": "3,200+ bought this week",
+    "stockLeft": 12,
+    "description": "Essential crew neck T-shirt in premium jersey cotton. Durable and comfortable. Classic fit for every day.tile for work and events.",
     "sizes": ["S", "M", "L", "XL"],
     "variants": [
       {
@@ -278,25 +288,28 @@
     "id": "11",
     "name": "Slim Fit Stretch Jeans",
     "category": "jeans",
-    "price": 2999,
-    "discount": 25,
-    "description": "Slim fit jeans with 2% elastane for comfort. Mid-rise, five-pocket style. Durable denim.",
+    "price": 3499,
+    "discount": 10,
+    "isBestSeller": true,
+    "salesCount": "1,100+ bought this month",
+    "stockLeft": 2,
+    "description": "Slim fit jeans with unique washed effect. Premium denim with a touch of stretch. Urban look.",
     "sizes": ["28", "30", "32", "34", "36"],
     "variants": [
       {
         "color": "Dark Blue",
         "colorCode": "#00008B",
-        "image": "/products/jeans-slim-11.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Light Blue",
         "colorCode": "#ADD8E6",
-        "image": "/products/jeans-regular-12.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Black",
         "colorCode": "#000000",
-        "image": "/products/jeans-tapered-13.jpg"
+        "image": "/products/placeholder.png"
       }
     ],
     "rating": 4.6
@@ -313,17 +326,17 @@
       {
         "color": "Indigo",
         "colorCode": "#4B0082",
-        "image": "/products/jeans-regular-12.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Black",
         "colorCode": "#000000",
-        "image": "/products/jeans-slim-11.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Grey",
         "colorCode": "#808080",
-        "image": "/products/jeans-tapered-13.jpg"
+        "image": "/products/placeholder.png"
       }
     ],
     "rating": 4.5
@@ -340,17 +353,17 @@
       {
         "color": "Dark Indigo",
         "colorCode": "#000033",
-        "image": "/products/jeans-tapered-13.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Black",
         "colorCode": "#000000",
-        "image": "/products/jeans-slim-11.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Mid Blue",
         "colorCode": "#0000CD",
-        "image": "/products/jeans-regular-12.jpg"
+        "image": "/products/placeholder.png"
       }
     ],
     "rating": 4.4
@@ -367,17 +380,17 @@
       {
         "color": "Light Blue",
         "colorCode": "#ADD8E6",
-        "image": "/products/jeans-carpenter-14.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Dark Blue",
         "colorCode": "#00008B",
-        "image": "/products/jeans-slim-11.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Black",
         "colorCode": "#000000",
-        "image": "/products/jeans-regular-12.jpg"
+        "image": "/products/placeholder.png"
       }
     ],
     "rating": 4.0
@@ -394,12 +407,12 @@
       {
         "color": "Blue",
         "colorCode": "#0000FF",
-        "image": "/products/jeans-ripped-15.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Black",
         "colorCode": "#000000",
-        "image": "/products/jeans-slim-11.jpg"
+        "image": "/products/placeholder.png"
       }
     ],
     "rating": 4.3
@@ -416,17 +429,17 @@
       {
         "color": "Beige",
         "colorCode": "#F5F5DC",
-        "image": "/products/trouser-chino-16.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Navy",
         "colorCode": "#000080",
-        "image": "/products/trouser-formal-17.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Olive",
         "colorCode": "#808000",
-        "image": "/products/trouser-jogger-18.jpg"
+        "image": "/products/placeholder.png"
       }
     ],
     "rating": 4.5
@@ -443,17 +456,17 @@
       {
         "color": "Black",
         "colorCode": "#000000",
-        "image": "/products/trouser-formal-17.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Navy",
         "colorCode": "#000080",
-        "image": "/products/trouser-chino-16.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Grey",
         "colorCode": "#808080",
-        "image": "/products/trouser-jogger-18.jpg"
+        "image": "/products/placeholder.png"
       }
     ],
     "rating": 4.4
@@ -470,22 +483,22 @@
       {
         "color": "Black",
         "colorCode": "#000000",
-        "image": "/products/trouser-jogger-18.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Grey",
         "colorCode": "#808080",
-        "image": "/products/trouser-chino-16.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Navy",
         "colorCode": "#000080",
-        "image": "/products/trouser-formal-17.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Olive",
         "colorCode": "#808000",
-        "image": "/products/trouser-pleated-19.jpg"
+        "image": "/products/placeholder.png"
       }
     ],
     "rating": 4.2
@@ -502,17 +515,17 @@
       {
         "color": "Black",
         "colorCode": "#000000",
-        "image": "/products/trouser-pleated-19.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Navy",
         "colorCode": "#000080",
-        "image": "/products/trouser-chino-16.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Charcoal",
         "colorCode": "#36454F",
-        "image": "/products/trouser-formal-17.jpg"
+        "image": "/products/placeholder.png"
       }
     ],
     "rating": 4.3
@@ -529,24 +542,27 @@
       {
         "color": "Olive",
         "colorCode": "#808000",
-        "image": "/products/trouser-cargo-20.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Black",
         "colorCode": "#000000",
-        "image": "/products/trouser-chino-16.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Khaki",
         "colorCode": "#F0E68C",
-        "image": "/products/trouser-formal-17.jpg"
+        "image": "/products/placeholder.png"
       },
       {
         "color": "Grey",
         "colorCode": "#808080",
-        "image": "/products/trouser-jogger-18.jpg"
+        "image": "/products/placeholder.png"
       }
     ],
     "rating": 4.1
   }
 ]
+
+  
+
