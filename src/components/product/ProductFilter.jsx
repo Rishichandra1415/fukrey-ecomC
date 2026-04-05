@@ -31,15 +31,6 @@ export default function ProductFilter({ sortBy, setSortBy, totalProducts }) {
       <div className="container mx-auto px-4">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-bold uppercase tracking-widest text-fukrey-muted">
-              Showing
-            </span>
-            <span className="text-sm font-black text-foreground">
-              {totalProducts}
-            </span>
-            <span className="text-xs font-bold uppercase tracking-widest text-fukrey-muted">
-              Products
-            </span>
           </div>
 
           <div className="relative">

@@ -18,6 +18,7 @@ const ITEMS_PER_PAGE = 12;
 export default function NewArrivalsPage() {
   const [filters, setFilters] = useState({
     category: [],
+    minPrice: 500,
     maxPrice: 5000,
     color: [],
     size: [],
@@ -39,11 +40,10 @@ export default function NewArrivalsPage() {
         if (!match) return false;
       }
 
-      // Price filter
       const finalPrice = product.discount 
         ? product.price * (1 - product.discount / 100)
         : product.price;
-      if (finalPrice > filters.maxPrice) return false;
+      if (finalPrice < filters.minPrice || finalPrice > filters.maxPrice) return false;
 
       // Color filter
       if (filters.color.length > 0) {
@@ -109,6 +109,7 @@ export default function NewArrivalsPage() {
   const clearFilters = () => {
     setFilters({
       category: [],
+      minPrice: 500,
       maxPrice: 5000,
       color: [],
       size: [],
@@ -152,9 +153,7 @@ export default function NewArrivalsPage() {
           <span className="text-foreground">New Arrivals</span>
         </div>
 
-        {/* Sort Bar */}
         <SortBar 
-          totalItems={totalItems} 
           sortBy={sortBy} 
           setSortBy={setSortBy} 
           onMobileFilterClick={() => setIsMobileFilterOpen(true)}

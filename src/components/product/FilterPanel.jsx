@@ -38,8 +38,13 @@ export default function FilterPanel({ filters, setFilters, clearFilters, itemCou
     setFilters({ ...filters, [section]: newValues });
   };
 
-  const handlePriceChange = (e) => {
-    setFilters({ ...filters, maxPrice: parseInt(e.target.value) });
+  const handlePriceChange = (e, type) => {
+    const value = parseInt(e.target.value);
+    if (type === "min") {
+      setFilters({ ...filters, minPrice: Math.min(value, (filters.maxPrice || 5000) - 100) });
+    } else {
+      setFilters({ ...filters, maxPrice: Math.max(value, (filters.minPrice || 500) + 100) });
+    }
   };
 
   const handleValueToggle = (section, value) => {
@@ -117,28 +122,60 @@ export default function FilterPanel({ filters, setFilters, clearFilters, itemCou
         </div>
 
         {/* Price Range */}
-        <div className="border-b pb-6">
+        <div className="border-b pb-8">
           <button 
             onClick={() => toggleSection('price')}
             className="flex w-full items-center justify-between py-2 text-sm font-bold uppercase tracking-widest text-foreground"
           >
-            Price
+            Price Range
             <ChevronDown className={`h-4 w-4 transition-transform ${openSections.price ? "" : "-rotate-90"}`} />
           </button>
           {openSections.price && (
-            <div className="mt-4 space-y-4">
-              <input 
-                type="range" 
-                min="500" 
-                max="5000" 
-                step="100"
-                value={filters.maxPrice || 5000}
-                onChange={handlePriceChange}
-                className="w-full accent-foreground h-1 bg-fukrey-muted/20 rounded-lg appearance-none cursor-pointer"
-              />
-              <div className="flex items-center justify-between text-xs font-bold text-fukrey-muted uppercase">
-                <span>₹500</span>
-                <span className="text-foreground bg-fukrey-muted/10 px-2 py-1 rounded">₹{filters.maxPrice || 5000}</span>
+            <div className="mt-8 px-1">
+              <div className="relative h-1.5 w-full bg-fukrey-muted/20 rounded-full">
+                {/* Highlighted Track */}
+                <div 
+                  className="absolute h-full bg-foreground rounded-full"
+                  style={{
+                    left: `${((filters.minPrice || 500) - 500) / 4500 * 100}%`,
+                    right: `${100 - ((filters.maxPrice || 5000) - 500) / 4500 * 100}%`
+                  }}
+                />
+                
+                {/* Range Inputs */}
+                <input 
+                  type="range" 
+                  min="500" 
+                  max="5000" 
+                  step="100"
+                  value={filters.minPrice || 500}
+                  onChange={(e) => handlePriceChange(e, "min")}
+                  className="absolute inset-0 w-full appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-foreground [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-background [&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-foreground [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-background [&::-moz-range-thumb]:appearance-none"
+                />
+                <input 
+                  type="range" 
+                  min="500" 
+                  max="5000" 
+                  step="100"
+                  value={filters.maxPrice || 5000}
+                  onChange={(e) => handlePriceChange(e, "max")}
+                  className="absolute inset-0 w-full appearance-none bg-transparent pointer-events-none [&::-webkit-slider-thumb]:pointer-events-auto [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-foreground [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-background [&::-webkit-slider-thumb]:appearance-none [&::-moz-range-thumb]:pointer-events-auto [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-foreground [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-background [&::-moz-range-thumb]:appearance-none"
+                />
+              </div>
+              
+              <div className="mt-8 flex items-center justify-between">
+                <div className="flex flex-col gap-1">
+                  <span className="text-[9px] font-black text-fukrey-muted uppercase tracking-tighter">Min Price</span>
+                  <div className="flex h-9 w-24 items-center justify-center rounded border border-fukrey-border bg-fukrey-muted/5 text-xs font-black text-foreground">
+                    ₹{filters.minPrice || 500}
+                  </div>
+                </div>
+                <div className="flex flex-col gap-1 items-end">
+                  <span className="text-[9px] font-black text-fukrey-muted uppercase tracking-tighter">Max Price</span>
+                  <div className="flex h-9 w-24 items-center justify-center rounded border border-fukrey-border bg-fukrey-muted/5 text-xs font-black text-foreground">
+                    ₹{filters.maxPrice || 5000}
+                  </div>
+                </div>
               </div>
             </div>
           )}

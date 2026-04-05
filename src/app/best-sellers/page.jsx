@@ -19,6 +19,7 @@ const ITEMS_PER_PAGE = 12;
 export default function BestSellersPage() {
   const [filters, setFilters] = useState({
     category: [],
+    minPrice: 500,
     maxPrice: 5000,
     color: [],
     size: [],
@@ -44,11 +45,10 @@ export default function BestSellersPage() {
         if (!match) return false;
       }
 
-      // Price filter
       const finalPrice = product.discount 
         ? product.price * (1 - product.discount / 100)
         : product.price;
-      if (finalPrice > filters.maxPrice) return false;
+      if (finalPrice < filters.minPrice || finalPrice > filters.maxPrice) return false;
 
       // Color filter
       if (filters.color.length > 0) {
@@ -114,6 +114,7 @@ export default function BestSellersPage() {
   const clearFilters = () => {
     setFilters({
       category: [],
+      minPrice: 500,
       maxPrice: 5000,
       color: [],
       size: [],
@@ -160,19 +161,10 @@ export default function BestSellersPage() {
                 <Flame className="h-6 w-6 text-amber-500 sm:h-12 sm:w-12 animate-pulse" />
                 Best Sellers
               </h1>
-              <div className="flex items-center gap-2">
-                <span className="text-xl font-bold text-fukrey-muted/20 sm:text-4xl">/</span>
-                <span className="text-sm font-black uppercase tracking-widest text-fukrey-muted sm:text-2xl">{totalItems} Items</span>
-              </div>
             </div>
             <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-fukrey-muted sm:text-lg sm:tracking-[0.3em]">
               Most loved by customers
             </p>
-            <div className="mt-2 sm:mt-4 flex flex-wrap gap-2">
-              <span className="inline-flex items-center rounded-full border border-fukrey-border/50 bg-fukrey-muted/5 px-3 py-1.5 text-[8px] font-black uppercase tracking-widest text-foreground sm:px-4 sm:py-2 sm:text-[10px]">
-                Showing {totalItems} Best Sellers
-              </span>
-            </div>
           </div>
         </div>
 

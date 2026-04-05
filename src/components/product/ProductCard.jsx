@@ -140,19 +140,20 @@ export default function ProductCard({ product }) {
             </>
           )}
 
-          {/* Discount Badge */}
-          {product?.discount > 0 && (
-            <div className="absolute top-3 left-3 z-10 rounded bg-red-600 px-2 py-0.5 text-[10px] font-bold text-white shadow-lg sm:text-xs tracking-tight">
-              {product.discount}% OFF
-            </div>
-          )}
-
-          {/* Best Seller Badge */}
-          {product?.isBestSeller && (
-            <div className="absolute top-3 left-3 z-10 translate-y-6 rounded bg-amber-500 px-2 py-0.5 text-[10px] font-bold text-white shadow-lg sm:text-xs tracking-tight">
-              BEST SELLER
-            </div>
-          )}
+          {/* Badges Column */}
+          <div className="absolute top-3 left-3 z-10 flex flex-col gap-1 items-start pointer-events-none">
+            {product?.discount > 0 && (
+              <div className="rounded bg-red-600 px-1.5 py-0.5 text-[9px] font-black text-white shadow-lg sm:text-[10px] tracking-tight uppercase">
+                {product.discount}% OFF
+              </div>
+            )}
+            
+            {product?.isBestSeller && (
+              <div className="rounded bg-amber-500 px-1.5 py-0.5 text-[9px] font-black text-white shadow-lg sm:text-[10px] tracking-tight uppercase">
+                BEST SELLER
+              </div>
+            )}
+          </div>
 
           {/* Quick Action Overlay (Overlay on hover) */}
           <div className="absolute inset-0 z-20 flex flex-col items-center justify-end p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 bg-gradient-to-t from-black/40 to-transparent">
@@ -225,7 +226,7 @@ export default function ProductCard({ product }) {
             </div>
           </div>
 
-          <h3 className="mt-1.5 text-sm font-semibold leading-tight text-foreground transition-colors group-hover:text-amber-600 sm:text-base line-clamp-1">
+          <h3 className="mt-1.5 text-sm font-bold leading-tight text-foreground transition-colors group-hover:text-amber-600 sm:text-base line-clamp-2 min-h-[2.5em]">
             {product?.name || "Premium Cotton Product"}
           </h3>
 
@@ -264,7 +265,7 @@ export default function ProductCard({ product }) {
                 ))}
               </div>
               {product.variants.length > 4 && (
-                <span className="text-[8px] font-bold text-fukrey-muted sm:text-[10px]">
+                <span className="text-[10px] font-black text-fukrey-muted sm:text-[11px]">
                   +{product.variants.length - 4}
                 </span>
               )}
@@ -272,29 +273,18 @@ export default function ProductCard({ product }) {
           )}
           
           <div className="mt-auto pt-3 flex flex-col gap-2">
-            <div className="flex items-center justify-between">
-              <div className="flex items-baseline gap-1.5 sm:gap-2">
-                <span className="text-sm font-black text-foreground sm:text-lg">
-                  {discountedPrice || formattedPrice}
-                </span>
-                {discountedPrice && (
-                  <span className="text-[10px] text-fukrey-muted line-through sm:text-sm font-medium">
-                    {formattedPrice}
-                  </span>
-                )}
-              </div>
-            </div>
+            {/* Social Proof area */}
 
             {/* Social Proof Row */}
             {(product?.salesCount || (product?.stockLeft && product.stockLeft <= 5)) && (
               <div className="flex flex-wrap items-center gap-2 border-t border-fukrey-border/30 pt-2">
                 {product?.salesCount && (
-                  <span className="text-[8px] font-bold text-amber-600 sm:text-[9px] uppercase tracking-wider">
+                  <span className="text-[10px] font-black text-amber-600 sm:text-[11px] uppercase tracking-wider">
                     🔥 {product.salesCount}
                   </span>
                 )}
                 {product?.stockLeft && product.stockLeft <= 5 && (
-                  <span className="text-[8px] font-bold text-red-600 sm:text-[9px] uppercase tracking-wider">
+                  <span className="text-[10px] font-black text-red-600 sm:text-[11px] uppercase tracking-wider">
                     ⚠️ Only {product.stockLeft} left
                   </span>
                 )}

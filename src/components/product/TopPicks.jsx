@@ -22,10 +22,10 @@ export default function TopPicks({ products }) {
         </div>
       </div>
 
-      <div className="-mx-4 flex gap-4 overflow-x-auto pb-6 px-4 scrollbar-hide sm:mx-0 sm:grid sm:grid-cols-2 sm:px-0 lg:grid-cols-3 sm:gap-8">
+      <div className="-mx-4 flex gap-4 overflow-x-auto pb-6 px-4 pt-8 scrollbar-hide sm:mx-0 sm:grid sm:grid-cols-2 sm:px-0 lg:grid-cols-3 sm:gap-8 sm:pt-12">
         {products.slice(0, 3).map((product, index) => (
           <div key={product.id} className="relative group min-w-[280px] sm:min-w-0">
-            <div className="absolute -top-2 -right-2 z-30 rotate-6 rounded-md bg-foreground px-2.5 py-1 text-[8px] font-black uppercase tracking-widest text-background shadow-xl transition-transform group-hover:rotate-0 group-hover:scale-110 sm:-top-3 sm:-right-3 sm:rotate-12 sm:rounded-lg sm:px-3 sm:py-1.5 sm:text-[10px]">
+            <div className="absolute -top-3 -right-2 z-30 rotate-6 rounded bg-amber-600 px-3 py-1 text-[9px] font-black uppercase tracking-widest text-white shadow-2xl transition-transform group-hover:rotate-0 group-hover:scale-110 sm:-top-4 sm:-right-3 sm:rotate-12 sm:px-4 sm:py-1.5 sm:text-[11px] italic">
               {labels[index % labels.length]}
             </div>
             <ProductCard product={product} />

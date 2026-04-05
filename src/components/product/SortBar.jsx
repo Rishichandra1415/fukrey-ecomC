@@ -37,23 +37,16 @@ export default function SortBar({
   return (
     <div className="sticky top-[56px] z-30 -mx-4 bg-background/95 backdrop-blur-xl border-b border-fukrey-border/30 px-4 py-3 sm:top-16 sm:mx-0 sm:px-0 sm:py-4 transition-all duration-300">
       <div className="flex items-center justify-between">
-        {/* Left: Info */}
-        <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4">
-          <h1 className="text-base font-extrabold tracking-tight text-foreground sm:text-2xl">{title}</h1>
-          <div className="flex items-center gap-2 sm:gap-4">
-             <span className="hidden h-4 w-[1px] bg-fukrey-border sm:block" />
-             <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-fukrey-muted sm:text-[10px]">
-               {totalItems} {itemLabel}
-             </p>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4">
+            <h1 className="text-base font-extrabold tracking-tight text-foreground sm:text-2xl">{title}</h1>
           </div>
-        </div>
 
         {/* Right: Sort & Mobile Filter Toggle */}
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Mobile Filter Toggle */}
           <button 
             onClick={onMobileFilterClick}
-            className="flex items-center gap-1.5 rounded-full border border-fukrey-border bg-background px-3 py-1.5 text-[9px] font-bold uppercase tracking-wider text-foreground transition-all active:scale-95 lg:hidden"
+            className="flex items-center gap-1.5 rounded-full border border-fukrey-border bg-background px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-foreground transition-all active:scale-95 lg:hidden"
           >
             <SlidersHorizontal className="h-3 w-3" />
             Filters
@@ -63,9 +56,9 @@ export default function SortBar({
           <div className="relative" ref={dropdownRef}>
             <button 
               onClick={() => setIsOpen(!isOpen)}
-              className="flex items-center gap-2 rounded-full border border-fukrey-border bg-background px-3 py-1.5 text-[9px] font-bold uppercase tracking-wider text-foreground transition-all active:scale-95 sm:px-4 sm:py-2 sm:text-[11px] sm:tracking-widest"
+              className="flex items-center gap-2 rounded-full border border-fukrey-border bg-background px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-foreground transition-all active:scale-95 sm:px-4 sm:py-2 sm:text-[11px] sm:tracking-widest"
             >
-              <span className="hidden text-fukrey-muted sm:inline text-[10px]">Sort by:</span>
+              <span className="hidden text-fukrey-muted sm:inline text-[11px]">Sort by:</span>
               <span className="text-foreground">{currentSort.label}</span>
               <ChevronDown className={`h-3 w-3 transition-transform sm:h-4 sm:w-4 ${isOpen ? "rotate-180" : ""}`} />
             </button>

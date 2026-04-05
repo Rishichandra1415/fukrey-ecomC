@@ -42,8 +42,8 @@ export default function ProductDetailPage({ params }) {
     setSelectedVariant(product.variants?.[0]);
   }
 
-  // Derived images from variants
-  const productImages = product?.variants?.map(v => v.image) || [];
+  // Derived images from variants - handles both single 'image' and 'images' array
+  const productImages = product?.variants?.map(v => v.image || (v.images && v.images[0])).filter(Boolean) || [];
 
   if (!product) {
     return (
@@ -153,26 +153,29 @@ export default function ProductDetailPage({ params }) {
                 )}
               </div>
 
-              {/* Thumbnails */}
               <div className="flex gap-3 overflow-x-auto pb-2">
-                {productImages.map((img, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setActiveImage(index)}
-                    className={`relative aspect-[4/5] w-20 flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all ${
-                      activeImage === index 
-                        ? "border-foreground" 
-                        : "border-fukrey-border opacity-60 hover:opacity-100"
-                    }`}
-                  >
-                    <Image
-                      src={img}
-                      alt={`Thumbnail ${index + 1}`}
-                      fill
-                      className="object-cover"
-                    />
-                  </button>
-                ))}
+                {productImages.length > 0 ? (
+                  productImages.map((img, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setActiveImage(index)}
+                      className={`relative aspect-[4/5] w-20 flex-shrink-0 overflow-hidden rounded-lg border-2 transition-all ${
+                        activeImage === index 
+                          ? "border-foreground" 
+                          : "border-fukrey-border opacity-60 hover:opacity-100"
+                      }`}
+                    >
+                      <Image
+                        src={img || "/products/placeholder.png"}
+                        alt={`Thumbnail ${index + 1}`}
+                        fill
+                        className="object-cover"
+                      />
+                    </button>
+                  ))
+                ) : (
+                  <div className="relative aspect-[4/5] w-20 rounded-lg border-2 border-fukrey-border bg-fukrey-muted/10" />
+                )}
               </div>
             </div>
 

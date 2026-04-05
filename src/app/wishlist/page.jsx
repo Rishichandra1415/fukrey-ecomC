@@ -110,8 +110,8 @@ function WishlistItem({ item, onRemove, onMoveToCart }) {
       {/* Image */}
       <div className="relative aspect-[4/5] w-full overflow-hidden bg-fukrey-muted/5">
         <Image
-          src={item.image}
-          alt={item.name}
+          src={item.image || item.variants?.[0]?.images?.[0] || item.variants?.[0]?.image || "/placeholder.png"}
+          alt={item.name || "Product Image"}
           fill
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
